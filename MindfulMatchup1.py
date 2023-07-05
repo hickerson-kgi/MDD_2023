@@ -18,18 +18,14 @@ import random
 
 
 def generate_equation():
-    operators = ['+', '-', '*', '/']
-    operator = random.choice(operators)
-    num1 = random.randint(1, 10)
-    num2 = random.randint(1, 10)
-
-    equation = f"{num1} {operator} {num2}"
-    result = eval(equation)
-    return equation, result
-
     equations = []
     for _ in range(4):
-        equation, result = generate_equation()
+        operators = ['+', '-', '*', '/']
+        operator = random.choice(operators)
+        num1 = random.randint(1, 10)
+        num2 = random.randint(1, 10)
+        equation = f"{num1} {operator} {num2}"
+        result = eval(equation)
         equations.append(equation)
         equations.append(result)
 
@@ -51,7 +47,29 @@ class MainWidget(GridLayout):
 
     def __init__(self, **kwargs):
         super(MainWidget, self).__init__(**kwargs)
-        ids = ['a1_btn', 'a2_btn']
+        generate_equation()
+        ids = ['a1_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['a2_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['b1_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['b2_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['c1_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['c2_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['d1_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['d2_btn']
         for id in ids:
             self.ids[id].text = str(generate_equation())
 
