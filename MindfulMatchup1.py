@@ -63,7 +63,7 @@ class MainWidget(GridLayout):
     def answer(self, id):
         self.ids[id].background_color = (1, 1, 1, 1)
 
- 
+
 # we are defining the Base Class of our Kivy App
 class MindfulMatchup1App(App):
     def build(self):
