@@ -46,20 +46,29 @@ class MainWidget(GridLayout):
     def __init__(self, **kwargs):
         super(MainWidget, self).__init__(**kwargs)
         questions, answers = generate_equation()
+        answer_order = [0, 1, 2, 3]
 
         left_ids = ['a1_btn', 'b1_btn', 'c1_btn', 'd1_btn']
         for i in range(len(left_ids)):
             self.ids[left_ids[i]].text = str(questions[i])
         right_ids = ['a2_btn', 'b2_btn', 'c2_btn', 'd2_btn']
-        random.shuffle(answers)
+        random.shuffle(answer_order)
         for j in range(len(right_ids)):
-            self.ids[right_ids[j]].text = str(answers[j])
-
-
-
+            self.ids[right_ids[j]].text = str(answers[answer_order[j]])
     def generate(self, id):
-        self.ids[id].background_color = (0, 1, .5, 1)
- 
+
+
+        btn = self.ids[id]
+        btn_text = self.ids[id].text
+        btn_index = questions.index(prev_btn)
+        if prev_btn_index == btn_index:
+            prev_btn.background_color = (0, 1, .5, 1)
+            self.ids[id].background_color = (0, 1, .5, 1)
+
+        prev_btn = self.ids[id]
+        prev_btn_text = self.ids[id].text
+        prev_btn_index = questions.index(prev_btn)
+
     def answer(self, id):
         self.ids[id].background_color = (1, 1, 1, 1)
 
