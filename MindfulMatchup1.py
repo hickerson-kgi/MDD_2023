@@ -28,6 +28,8 @@ print("Generated equation:", equation)
 result = eval(equation)
 print("Result:", result)
 
+
+
 class MainWidget(GridLayout):
     pass
  
