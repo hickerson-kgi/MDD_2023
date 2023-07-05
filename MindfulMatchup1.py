@@ -13,6 +13,7 @@ from kivy.uix.gridlayout import GridLayout
 
 #math equations
 import random
+
 def generate_equation():
     operators = ['+', '-', '*', '/']
     operator = random.choice(operators)
@@ -22,6 +23,10 @@ def generate_equation():
     equation = f"{num1} {operator} {num2}"
     return equation
 
+def answer_equation(equation):
+    # actually figure out the answer
+    return 'correct answer'
+
 # Example usage:
 equation = generate_equation()
 print("Generated equation:", equation)
@@ -29,9 +34,21 @@ result = eval(equation)
 print("Result:", result)
 
 class MainWidget(GridLayout):
-    def selected(self, id):
-        self.ids[id].text = str(result)
-        self.ids[id].background_color = (0, 1, 0.5, 1)
+
+    def __init__(self, **kwargs):
+        super(MainWidget, self).__init__(**kwargs)
+        ids = ['a1_btn', 'a2_btn']
+        for id in ids:
+            self.ids[id].text = generate_equation()
+
+    def generate(self, id):
+        self.ids[id].text = generate_equation()
+        # self.ids[id].background_color = (0, 1, 0.5, 1)
+ 
+    def answer(self, id):
+        equation = self.ids[id].text
+        self.ids[id].text = answer_equation(equation)
+
  
 # we are defining the Base Class of our Kivy App
 class MindfulMatchup1App(App):

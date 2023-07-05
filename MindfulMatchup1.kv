@@ -6,32 +6,33 @@
     Button:
         id: a1_btn
         text: '5*2'
-        on_release: root.selected('a1_btn')
+        on_press: root.answer('a1_btn')
+        on_release: root.generate('a1_btn')
     Button:
         id: a2_btn
         text: '3+4'
-        on_release: root.selected('a2_btn')
+        on_release: root.generate('a2_btn')
     Button:
         id: b1_btn
         text: '8*9'
-        on_release: root.selected('b1_btn')
+        on_release: root.generate('b1_btn')
     Button:       
         id: b2_btn
         text: '6-3'
-        on_release: root.selected('b2_btn')
+        on_release: root.generate('b2_btn')
     Button:       
         id: c1_btn
         text: '3'
-        on_release: root.selected('c1_btn')
+        on_release: root.generate('c1_btn')
     Button:
         id: c2_btn
         text: '17'
-        on_release: root.selected('c2_btn')
+        on_release: root.generate('c2_btn')
     Button:
         id: d1_btn
         text: '7'
-        on_release: root.selected('d1_btn')
+        on_release: root.generate('d1_btn')
     Button:       
         id: d2_btn
         text: '10'
-        on_release: root.selected('d2_btn')
+        on_release: root.generate('d2_btn')
