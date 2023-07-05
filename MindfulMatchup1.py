@@ -36,8 +36,6 @@ def generate_equation():
 
     return equations
 
-
-
 #def answer_equation(equation):
     # actually figure out the answer
     #return 'correct answer'
@@ -50,7 +48,7 @@ class MainWidget(GridLayout):
         generate_equation()
         ids = ['a1_btn']
         for id in ids:
-            self.ids[id].text = str(generate_equation())
+            self.ids[id].text = str(equations)
         ids = ['a2_btn']
         for id in ids:
             self.ids[id].text = str(generate_equation())
