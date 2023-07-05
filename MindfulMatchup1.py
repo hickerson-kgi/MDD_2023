@@ -72,7 +72,7 @@ class MainWidget(GridLayout):
             self.ids[id].text = str(equations[7])
 
     def generate(self, id):
-        self.ids[id].text = str(generate_equation())
+        #self.ids[id].text = str(generate_equation())
         self.ids[id].background_color = (0, 1, 0.5, 1)
  
     def answer(self, id):
