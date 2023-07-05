@@ -1,6 +1,6 @@
 
-# main.py
-# import the kivy module
+#main.py
+#import the kivy module
 import kivy
  
 # It’s required that the base Class
