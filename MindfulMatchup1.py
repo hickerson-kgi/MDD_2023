@@ -12,11 +12,6 @@ from kivy.uix.gridlayout import GridLayout
 # when it is called goes to my.kv file
 
 #math equations
-import random
-
-import random
-
-import random
 
 import random
 
@@ -55,19 +50,20 @@ class MainWidget(GridLayout):
         random.shuffle(answer_order)
         for j in range(len(right_ids)):
             self.ids[right_ids[j]].text = str(answers[answer_order[j]])
-    def generate(self, id):
 
 
-        btn = self.ids[id]
-        btn_text = self.ids[id].text
-        btn_index = questions.index(prev_btn)
-        if prev_btn_index == btn_index:
-            prev_btn.background_color = (0, 1, .5, 1)
-            self.ids[id].background_color = (0, 1, .5, 1)
+    #def generate(self, id):
 
-        prev_btn = self.ids[id]
-        prev_btn_text = self.ids[id].text
-        prev_btn_index = questions.index(prev_btn)
+    #    btn = self.ids[id]
+    #    btn_text = self.ids[id].text
+    #    btn_index = questions.index(prev_btn)
+    #    if prev_btn_index == btn_index:
+    #        prev_btn.background_color = (0, 1, .5, 1)
+    #       self.ids[id].background_color = (0, 1, .5, 1)
+
+    #    prev_btn = self.ids[id]
+    #    prev_btn_text = self.ids[id].text
+    #    prev_btn_index = questions.index(prev_btn)
 
     def answer(self, id):
         self.ids[id].background_color = (1, 1, 1, 1)
