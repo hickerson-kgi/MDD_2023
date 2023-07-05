@@ -16,14 +16,17 @@ import random
 
 import random
 
+import random
+
+import random
 
 def generate_equation():
     equations = []
     for _ in range(4):
         operators = ['+', '-', '*', '/']
         operator = random.choice(operators)
-        num1 = random.randint(1, 10)
-        num2 = random.randint(1, 10)
+        num1 = random.randint(1, 15)
+        num2 = random.randint(1, 15)
         equation = f"{num1} {operator} {num2}"
         result = eval(equation)
         equations.append(equation)
@@ -45,34 +48,34 @@ class MainWidget(GridLayout):
 
     def __init__(self, **kwargs):
         super(MainWidget, self).__init__(**kwargs)
-        generate_equation()
+        equations = generate_equation()
         ids = ['a1_btn']
         for id in ids:
-            self.ids[id].text = str(equations)
+            self.ids[id].text = str(equations[0])
         ids = ['a2_btn']
         for id in ids:
-            self.ids[id].text = str(generate_equation())
+            self.ids[id].text = str(equations[1])
         ids = ['b1_btn']
         for id in ids:
-            self.ids[id].text = str(generate_equation())
+            self.ids[id].text = str(equations[2])
         ids = ['b2_btn']
         for id in ids:
-            self.ids[id].text = str(generate_equation())
+            self.ids[id].text = str(equations[3])
         ids = ['c1_btn']
         for id in ids:
-            self.ids[id].text = str(generate_equation())
+            self.ids[id].text = str(equations[4])
         ids = ['c2_btn']
         for id in ids:
-            self.ids[id].text = str(generate_equation())
+            self.ids[id].text = str(equations[5])
         ids = ['d1_btn']
         for id in ids:
-            self.ids[id].text = str(generate_equation())
+            self.ids[id].text = str(equations[6])
         ids = ['d2_btn']
         for id in ids:
-            self.ids[id].text = str(generate_equation())
+            self.ids[id].text = str(equations[7])
 
     def generate(self, id):
-        self.ids[id].text = str(generate_equation())
+        #self.ids[id].text = str(generate_equation())
         self.ids[id].background_color = (0, 1, 0.5, 1)
  
     def answer(self, id):
