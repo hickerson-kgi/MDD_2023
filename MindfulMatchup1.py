@@ -46,30 +46,10 @@ class MainWidget(GridLayout):
     def __init__(self, **kwargs):
         super(MainWidget, self).__init__(**kwargs)
         equations = generate_equation()
-        ids = ['a1_btn']
-        for id in ids:
-            self.ids[id].text = str(equations[0])
-        ids = ['a2_btn']
-        for id in ids:
-            self.ids[id].text = str(equations[1])
-        ids = ['b1_btn']
-        for id in ids:
-            self.ids[id].text = str(equations[2])
-        ids = ['b2_btn']
-        for id in ids:
-            self.ids[id].text = str(equations[3])
-        ids = ['c1_btn']
-        for id in ids:
-            self.ids[id].text = str(equations[4])
-        ids = ['c2_btn']
-        for id in ids:
-            self.ids[id].text = str(equations[5])
-        ids = ['d1_btn']
-        for id in ids:
-            self.ids[id].text = str(equations[6])
-        ids = ['d2_btn']
-        for id in ids:
-            self.ids[id].text = str(equations[7])
+        ids = ['a1_btn', 'a2_btn', 'b1_btn', 'b2_btn', 'c1_btn', 'c2_btn', 'd1_btn', 'd2_btn']
+        for i in range(len(ids)):
+            self.ids[ids[i]].text = str(equations[i])
+
 
     def generate(self, id):
         #self.ids[id].text = str(generate_equation())
