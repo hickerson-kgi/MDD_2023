@@ -28,10 +28,6 @@ equations = []
 for _ in range(4):
     equation, result = generate_equation()
     equations.append((equation, result))
-# Print the list of equations and their results
-for equation, result in equations:
-    print({equation}, {result})
-
 
 #def answer_equation(equation):
     # actually figure out the answer
@@ -44,10 +40,10 @@ class MainWidget(GridLayout):
         super(MainWidget, self).__init__(**kwargs)
         ids = ['a1_btn', 'a2_btn']
         for id in ids:
-            self.ids[id].text = generate_equation()
+            self.ids[id].text = str(generate_equation())
 
     def generate(self, id):
-        self.ids[id].text = generate_equation()
+        self.ids[id].text = str(generate_equation())
         # self.ids[id].background_color = (0, 1, 0.5, 1)
  
     def answer(self, id):
