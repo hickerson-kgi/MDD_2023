@@ -31,7 +31,9 @@ print("Result:", result)
 
 
 class MainWidget(GridLayout):
-    pass
+    def selected(self, id):
+        self.ids[id].text = '10'
+        self.ids[id].background_color = (0, 1, 0.5, 1)
  
 # we are defining the Base Class of our Kivy App
 class MindfulMatchup1App(App):
