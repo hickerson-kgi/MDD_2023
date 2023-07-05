@@ -16,14 +16,17 @@ import random
 
 import random
 
+import random
+
+import random
 
 def generate_equation():
     equations = []
     for _ in range(4):
         operators = ['+', '-', '*', '/']
         operator = random.choice(operators)
-        num1 = random.randint(1, 10)
-        num2 = random.randint(1, 10)
+        num1 = random.randint(1, 15)
+        num2 = random.randint(1, 15)
         equation = f"{num1} {operator} {num2}"
         result = eval(equation)
         equations.append(equation)
