@@ -23,9 +23,9 @@ def generate_equation():
     equation = f"{num1} {operator} {num2}"
     return equation
 
-def answer_equation(equation):
+#def answer_equation(equation):
     # actually figure out the answer
-    return 'correct answer'
+    #return 'correct answer'
 
 # Example usage:
 equation = generate_equation()
