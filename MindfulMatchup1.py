@@ -21,7 +21,8 @@ import random
 import random
 
 def generate_equation():
-    equations = []
+    questions = []
+    answers = []
     for _ in range(4):
         operators = ['+', '-', '*', '/']
         operator = random.choice(operators)
@@ -29,15 +30,11 @@ def generate_equation():
         num2 = random.randint(1, 15)
         equation = f"{num1} {operator} {num2}"
         result = eval(equation)
-        equations.append(equation)
-        equations.append(result)
+        questions.append(equation)
+        answers.append(result)
 
-    # Print the list with alternating equation and result
-    for i in range(0, len(equations), 2):
-        equation = equations[i]
-        result = equations[i + 1]
+    return questions, answers
 
-    return equations
 
 #def answer_equation(equation):
     # actually figure out the answer
@@ -48,19 +45,22 @@ class MainWidget(GridLayout):
 
     def __init__(self, **kwargs):
         super(MainWidget, self).__init__(**kwargs)
-        equations = generate_equation()
-        ids = ['a1_btn', 'a2_btn', 'b1_btn', 'b2_btn', 'c1_btn', 'c2_btn', 'd1_btn', 'd2_btn']
-        for i in range(len(ids)):
-            self.ids[ids[i]].text = str(equations[i])
+        questions, answers = generate_equation()
+        left_ids = ['a1_btn', 'b1_btn', 'c1_btn', 'd1_btn']
+        for i in range(len(left_ids)):
+            self.ids[left_ids[i]].text = str(questions[i])
+        right_ids = ['a2_btn', 'b2_btn', 'c2_btn', 'd2_btn']
+        for j in range(len(right_ids)):
+            self.ids[right_ids[j]].text = str(answers[j])
 
 
     def generate(self, id):
         #self.ids[id].text = str(generate_equation())
         self.ids[id].background_color = (0, 1, 0.5, 1)
  
-    def answer(self, id):
-        equation = self.ids[id].text
-        self.ids[id].text = answer_equation(equation)
+    #def answer(self, id):
+    #    equation = self.ids[id].text
+    #    self.ids[id].text = answer_equation(equation)
 
  
 # we are defining the Base Class of our Kivy App
