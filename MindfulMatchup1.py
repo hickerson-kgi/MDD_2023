@@ -94,3 +94,5 @@ if __name__ == '__main__':
     # Here the class MyApp is initialized
     # and its run() method called.
     MindfulMatchup1App().run()
+
+    # ids = { 'btn1' = 0 , 'btn2' = 1, 'btn3' = 2, 'btn4' = 3} ->make a dictionary
