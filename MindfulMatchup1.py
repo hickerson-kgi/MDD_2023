@@ -62,7 +62,7 @@ class MainWidget(GridLayout):
     #    equation = self.ids[id].text
     #    self.ids[id].text = answer_equation(equation)
 
- 
+
 # we are defining the Base Class of our Kivy App
 class MindfulMatchup1App(App):
     def build(self):
