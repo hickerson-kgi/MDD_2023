@@ -14,36 +14,66 @@ from kivy.uix.gridlayout import GridLayout
 #math equations
 import random
 
+import random
+
+
 def generate_equation():
-    operators = ['+', '-', '*', '/']
-    operator = random.choice(operators)
-    num1 = random.randint(1, 10)
-    num2 = random.randint(1, 10)
+    equations = []
+    for _ in range(4):
+        operators = ['+', '-', '*', '/']
+        operator = random.choice(operators)
+        num1 = random.randint(1, 10)
+        num2 = random.randint(1, 10)
+        equation = f"{num1} {operator} {num2}"
+        result = eval(equation)
+        equations.append(equation)
+        equations.append(result)
 
-    equation = f"{num1} {operator} {num2}"
-    return equation
+    # Print the list with alternating equation and result
+    for i in range(0, len(equations), 2):
+        equation = equations[i]
+        result = equations[i + 1]
 
-def answer_equation(equation):
+    return equations
+
+#def answer_equation(equation):
     # actually figure out the answer
-    return 'correct answer'
+    #return 'correct answer'
 
-# Example usage:
-equation = generate_equation()
-print("Generated equation:", equation)
-result = eval(equation)
-print("Result:", result)
 
 class MainWidget(GridLayout):
 
     def __init__(self, **kwargs):
         super(MainWidget, self).__init__(**kwargs)
-        ids = ['a1_btn', 'a2_btn']
+        generate_equation()
+        ids = ['a1_btn']
         for id in ids:
-            self.ids[id].text = generate_equation()
+            self.ids[id].text = str(equations)
+        ids = ['a2_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['b1_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['b2_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['c1_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['c2_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['d1_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
+        ids = ['d2_btn']
+        for id in ids:
+            self.ids[id].text = str(generate_equation())
 
     def generate(self, id):
-        self.ids[id].text = generate_equation()
-        # self.ids[id].background_color = (0, 1, 0.5, 1)
+        self.ids[id].text = str(generate_equation())
+        self.ids[id].background_color = (0, 1, 0.5, 1)
  
     def answer(self, id):
         equation = self.ids[id].text
