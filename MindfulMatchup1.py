@@ -16,14 +16,17 @@ import random
 
 import random
 
+import random
+
+import random
 
 def generate_equation():
     equations = []
     for _ in range(4):
         operators = ['+', '-', '*', '/']
         operator = random.choice(operators)
-        num1 = random.randint(1, 10)
-        num2 = random.randint(1, 10)
+        num1 = random.randint(1, 15)
+        num2 = random.randint(1, 15)
         equation = f"{num1} {operator} {num2}"
         result = eval(equation)
         equations.append(equation)
@@ -71,3 +74,5 @@ if __name__ == '__main__':
     # Here the class MyApp is initialized
     # and its run() method called.
     MindfulMatchup1App().run()
+
+    # ids = { 'btn1' = 0 , 'btn2' = 1, 'btn3' = 2, 'btn4' = 3} ->make a dictionary
