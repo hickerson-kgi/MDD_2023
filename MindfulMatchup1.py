@@ -11,7 +11,9 @@ from kivy.uix.gridlayout import GridLayout
 # This class stores the info of .kv file
 # when it is called goes to my.kv file
 class MainWidget(GridLayout):
-    pass
+    def selected(self, id):
+        self.ids[id].text = '10'
+        self.ids[id].background_color = (0, 1, 0.5, 1)
  
 # we are defining the Base Class of our Kivy App
 class MindfulMatchup1App(App):
