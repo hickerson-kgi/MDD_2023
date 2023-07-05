@@ -6,10 +6,12 @@ def generate_equation():
     num2 = random.randint(1, 10)
 
     equation = f"{num1} {operator} {num2}"
-    return equation
-
-# Example usage:
-equation = generate_equation()
-print("Generated equation:", equation)
-result = eval(equation)
-print("Result:", result)
+    result = eval(equation)
+    return equation, result
+equations = []
+for _ in range(4):
+    equation, result = generate_equation()
+    equations.append((equation, result))
+# Print the list of equations and their results
+for equation, result in equations:
+    print({equation}, {result})
