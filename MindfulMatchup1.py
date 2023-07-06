@@ -52,14 +52,14 @@ class MainWidget(GridLayout):
             self.ids[right_ids[j]].text = str(answers[answer_order[j]])
 
 
-    #def generate(self, id):
+    def generate(self, id):
 
     #    btn = self.ids[id]
     #    btn_text = self.ids[id].text
     #    btn_index = questions.index(prev_btn)
     #    if prev_btn_index == btn_index:
     #        prev_btn.background_color = (0, 1, .5, 1)
-    #       self.ids[id].background_color = (0, 1, .5, 1)
+               self.ids[id].background_color = (0, 1, .5, 1)
 
     #    prev_btn = self.ids[id]
     #    prev_btn_text = self.ids[id].text
