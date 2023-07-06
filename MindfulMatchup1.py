@@ -1,11 +1,10 @@
-
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 import random
 from kivy.graphics import Color
 from kivy.clock import Clock
 
-
+# Function to generate random arithmetic equations
 def generate_equation():
 
     questions = []
@@ -29,6 +28,7 @@ def generate_equation():
     return questions, answers
 
 
+# MainWidget represents the main widget of the application
 class MainWidget(GridLayout):
 
     def __init__(self, **kwargs):
@@ -58,6 +58,7 @@ class MainWidget(GridLayout):
         self.selected_question = False
         self.selected_answer = False
 
+    # Function to handle button click events
     def generate(self, id):
         # print('prev:', self.selected_question, self.selected_answer)
 
@@ -108,11 +109,15 @@ class MainWidget(GridLayout):
             self.selected_answer = False
 
 
+    # Function to reset button colors after an incorrect match
     def reset_colors(self, dt):
             self.selected_question.background_color = (1, 1, 1, 1)
             self.selected_answer.background_color = (1, 1, 1, 1)
             self.selected_question = None
             self.selected_answer = None
+
+    def answer(self, id):
+        self.ids[id].background_color = (1, 1, 1, 1)
 
     def restart_game(self):
         questions, answers = generate_equation()
@@ -133,11 +138,14 @@ class MainWidget(GridLayout):
             btn.text = str(answers[self.answer_order[j]])
             btn.background_color = (0.5, 0.5, 0.5, 1)
 
+        MainWidget.prev_btn = None
+
 
 class MindfulMatchup1App(App):
     def build(self):
         return MainWidget()
 
 
+# Run the Kivy application
 if __name__ == '__main__':
     MindfulMatchup1App().run()
