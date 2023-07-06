@@ -73,6 +73,25 @@ class MainWidget(GridLayout):
     def answer(self, id):
         self.ids[id].background_color = (1, 1, 1, 1)
 
+    def restart_game(self):
+        questions, answers = generate_equation()
+        answer_order = [0, 1, 2, 3]
+
+        left_ids = ['1a_btn', '1b_btn', '1c_btn', '1d_btn']
+        for i in range(len(left_ids)):
+            btn = self.ids[left_ids[i]]
+            btn.text = str(questions[i])
+            btn.background_color = (0.5, 0.5, 0.5, 1)
+
+        right_ids = ['2a_btn', '2b_btn', '2c_btn', '2d_btn']
+        random.shuffle(answer_order)
+        for j in range(len(right_ids)):
+            btn = self.ids[right_ids[j]]
+            btn.text = str(answers[answer_order[j]])
+            btn.background_color = (0.5, 0.5, 0.5, 1)
+
+        MainWidget.prev_btn = None
+
 
 class MindfulMatchup1App(App):
     def build(self):
