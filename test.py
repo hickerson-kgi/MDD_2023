@@ -300,13 +300,13 @@ class MainWidget(GridLayout):
             btn.background_color = (0.5, 0.5, 0.5, 1)
 
 
-class MindfulMatchup1App(App):
+class Test(App):
     def build(self):
         return MainWidget()
 
 
 if __name__ == '__main__':
-    MindfulMatchup1App().run()
+    Test.run()
 
 
 
