@@ -25,7 +25,9 @@ def generate_equation():
 
 class MainWidget(GridLayout):
     prev_btn = None  # Initialize prev_btn with None
-
+    ###ADdedCode- initalize game duration to 0
+    game_duration = 0
+    game_timer = None
     def __init__(self, **kwargs):
         super(MainWidget, self).__init__(**kwargs)
         self.restart_game()
@@ -41,6 +43,23 @@ class MainWidget(GridLayout):
                 prev_btn.background_color = (0, 1, 0.5, 1)
                 btn.background_color = (0, 1, 0.5, 1)
         MainWidget.prev_btn = btn
+        # AddedCode Display the game duration after button push
+        print("Game Duration:", self.game_duration)
+        ###AddedCode- Start the game timer
+        Clock.schedule_interval(self.update_timer, 1)
+
+    ###Added Code
+    def on_start(self):
+        # Start the game timer
+        self.game_timer = Clock.schedule_interval(self.update_timer, 1)
+    ###Added Code
+    def on_stop(self):
+        # Stop the game timer
+        self.game_timer.cancel()
+    ###Added Code
+    def update_timer(self, dt):
+        self.game_duration += 1
+
 
     def answer(self, id):
         self.ids[id].background_color = (1, 1, 1, 1)
@@ -63,6 +82,9 @@ class MainWidget(GridLayout):
             btn.background_color = (0.5, 0.5, 0.5, 1)
 
         MainWidget.prev_btn = None
+
+
+
 
 
 class Testing(App):
