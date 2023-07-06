@@ -1,19 +1,8 @@
 
-# main.py
-# import the kivy module
-import kivy
- 
-# It’s required that the base Class
-# of your App inherits from the App class.
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
- 
-# This class stores the info of .kv file
-# when it is called goes to my.kv file
-
-#math equations
-
 import random
+
 
 def generate_equation():
     questions = []
@@ -24,19 +13,16 @@ def generate_equation():
         num1 = random.randint(1, 12)
         num2 = random.randint(1, 12)
         equation = f"{num1} {operator} {num2}"
-        result = eval(equation)
+        evaluate = eval(equation)
+        result = round(evaluate, 3)
         questions.append(equation)
         answers.append(result)
 
     return questions, answers
 
 
-#def answer_equation(equation):
-    # actually figure out the answer
-    #return 'correct answer'
-
-
 class MainWidget(GridLayout):
+    prev_btn = None  # Initialize prev_btn with None
 
     def __init__(self, **kwargs):
         super(MainWidget, self).__init__(**kwargs)
@@ -51,34 +37,26 @@ class MainWidget(GridLayout):
         for j in range(len(right_ids)):
             self.ids[right_ids[j]].text = str(answers[answer_order[j]])
 
-
-    #def generate(self, id):
-
-    #    btn = self.ids[id]
-    #    btn_text = self.ids[id].text
-    #    btn_index = questions.index(prev_btn)
-    #    if prev_btn_index == btn_index:
-    #        prev_btn.background_color = (0, 1, .5, 1)
-    #       self.ids[id].background_color = (0, 1, .5, 1)
-
-    #    prev_btn = self.ids[id]
-    #    prev_btn_text = self.ids[id].text
-    #    prev_btn_index = questions.index(prev_btn)
+    def generate(self, id):
+        btn = self.ids[id]
+        btn_text = btn.text
+        if MainWidget.prev_btn is not None:
+            prev_btn = MainWidget.prev_btn
+            prev_btn_index = list(self.ids.values()).index(prev_btn)
+            btn_index = list(self.ids.values()).index(btn)
+            if prev_btn_index == btn_index:
+                prev_btn.background_color = (0, 1, 0.5, 1)
+                btn.background_color = (0, 1, 0.5, 1)
+        MainWidget.prev_btn = btn
 
     def answer(self, id):
         self.ids[id].background_color = (1, 1, 1, 1)
 
 
-# we are defining the Base Class of our Kivy App
 class MindfulMatchup1App(App):
     def build(self):
-        # return a MainWidget() as a root widget
         return MainWidget()
- 
-if __name__ == '__main__':
-     
-    # Here the class MyApp is initialized
-    # and its run() method called.
-    MindfulMatchup1App().run()
 
-    # ids = { 'btn1' = 0 , 'btn2' = 1, 'btn3' = 2, 'btn4' = 3} ->make a dictionary
+
+if __name__ == '__main__':
+    MindfulMatchup1App().run()
