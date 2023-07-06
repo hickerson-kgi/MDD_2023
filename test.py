@@ -30,7 +30,8 @@ def generate_equation():
 
 # MainWidget represents the main widget of the application
 class MainWidget(GridLayout):
-
+    game_duration = 0
+    game_timer = None
     def __init__(self, **kwargs):
 
         super(MainWidget, self).__init__(**kwargs)
@@ -58,6 +59,8 @@ class MainWidget(GridLayout):
 
         self.selected_question = False
         self.selected_answer = False
+        ###AddedCode- Start the game timer
+        Clock.schedule_interval(self.update_timer, 1)
 
     # Function to handle button click events
     def generate(self, id):
@@ -108,6 +111,19 @@ class MainWidget(GridLayout):
 
             self.selected_question = False
             self.selected_answer = False
+        # AddedCode Display the game duration after button push
+        print("Game Duration:", self.game_duration)
+    ###Added Code
+    def on_start(self):
+        # Start the game timer
+        self.game_timer = Clock.schedule_interval(self.update_timer, 1)
+    ###Added Code
+    def on_stop(self):
+        # Stop the game timer
+        self.game_timer.cancel()
+    ###Added Code
+    def update_timer(self, dt):
+        self.game_duration += 1
 
     # Function to reset button colors after an incorrect match
     def reset_colors(self, dt):
