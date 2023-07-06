@@ -25,35 +25,10 @@ def generate_equation():
 
 class MainWidget(GridLayout):
     prev_btn = None  # Initialize prev_btn with None
-    ###ADdedCode- initalize game duration to 0
-    game_duration = 0
-    game_timer = None
 
     def __init__(self, **kwargs):
         super(MainWidget, self).__init__(**kwargs)
-        questions, answers = generate_equation()
-        answer_order = [0, 1, 2, 3]
-
-        left_ids = ['a1_btn', 'b1_btn', 'c1_btn', 'd1_btn']
-        for i in range(len(left_ids)):
-            self.ids[left_ids[i]].text = str(questions[i])
-        right_ids = ['a2_btn', 'b2_btn', 'c2_btn', 'd2_btn']
-        random.shuffle(answer_order)
-        for j in range(len(right_ids)):
-            self.ids[right_ids[j]].text = str(answers[answer_order[j]])
-        ###AddedCode- Start the game timer
-        Clock.schedule_interval(self.update_timer, 1)
-    ###Added Code
-    def on_start(self):
-        # Start the game timer
-        self.game_timer = Clock.schedule_interval(self.update_timer, 1)
-    ###Added Code
-    def on_stop(self):
-        # Stop the game timer
-        self.game_timer.cancel()
-    ###Added Code
-    def update_timer(self, dt):
-        self.game_duration += 1
+        self.restart_game()
 
     def generate(self, id):
         btn = self.ids[id]
@@ -66,24 +41,29 @@ class MainWidget(GridLayout):
                 prev_btn.background_color = (0, 1, 0.5, 1)
                 btn.background_color = (0, 1, 0.5, 1)
         MainWidget.prev_btn = btn
-        # AddedCode Display the game duration after button push
-        print("Game Duration:", self.game_duration)
 
     def answer(self, id):
         self.ids[id].background_color = (1, 1, 1, 1)
 
     def restart_game(self):
-        # Reset the game state here
         questions, answers = generate_equation()
         answer_order = [0, 1, 2, 3]
 
         left_ids = ['a1_btn', 'b1_btn', 'c1_btn', 'd1_btn']
         for i in range(len(left_ids)):
-            self.ids[left_ids[i]].text = str(questions[i])
+            btn = self.ids[left_ids[i]]
+            btn.text = str(questions[i])
+            btn.background_color = (0.5, 0.5, 0.5, 1)
+
         right_ids = ['a2_btn', 'b2_btn', 'c2_btn', 'd2_btn']
         random.shuffle(answer_order)
         for j in range(len(right_ids)):
-            self.ids[right_ids[j]].text = str(answers[answer_order[j]])
+            btn = self.ids[right_ids[j]]
+            btn.text = str(answers[answer_order[j]])
+            btn.background_color = (0.5, 0.5, 0.5, 1)
+
+        MainWidget.prev_btn = None
+
 
 class Testing(App):
     def build(self):
