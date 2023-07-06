@@ -45,27 +45,34 @@ class MainWidget(GridLayout):
         random.shuffle(answer_order)
         for j in range(len(right_ids)):
             self.ids[right_ids[j]].text = str(self.answers[answer_order[j]])
+        self.questions.append('0')
+        self.answers.append('0')
 
     # Function to handle button click events
     def generate(self, id):
-        self.selected_question = None
-        self.selected_answer = None
 
         if id.startswith("1"):
             self.selected_question = self.ids[id].text
+            self.selected_answer = '0'
         else:
             self.selected_answer = self.ids[id].text
+            self.selected_question = '0'
 
-        self.matching_colors = [Color(random.random(), random.random(), random.random(), 1) for _ in
-                                range(len(self.questions))]
+        if self.selected_question && self.selected_answer != '0':
+            self.set_colors(self.selected_question, self.selected_answer)
+
+    def set_colors(self):
+        #self.matching_colors = [Color(random.random(), random.random(), random.random(), 1) for _ in
+                                #range(len(self.questions))]
 
         if self.questions.index(self.selected_question) == self.answers.index(self.selected_answer):
-            matching_color_question = self.matching_colors[self.questions.index(self.selected_question)]
-            self.selected_question.background_color = matching_color_question.rgba
-            matching_color_answer = self.matching_colors[self.answers.index(self.selected_answer)]
-            self.selected_answer.background_color = matching_color_answer.rgba
-            self.selected_question = None
-            self.selected_answer = None
+
+            #matching_color_question = self.matching_colors[self.questions.index(self.selected_question)]
+            #self.selected_question.background_color = matching_color_question.rgba
+            #matching_color_answer = self.matching_colors[self.answers.index(self.selected_answer)]
+            #self.selected_answer.background_color = matching_color_answer.rgba
+            #self.selected_question = None
+            #self.selected_answer = None
         else:
             # Incorrect match
             self.selected_question.background_color = (1, 0, 0, 1)
