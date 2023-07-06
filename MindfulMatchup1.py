@@ -9,7 +9,9 @@ from kivy.clock import Clock
 def generate_equation():
     questions = []
     answers = []
-    for _ in range(4):
+    unique_results = set()  # Keep track of unique results
+
+    while len(questions) < 4:
         operators = ['+', '-', '*', '/']
         operator = random.choice(operators)
         num1 = random.randint(1, 12)
@@ -17,8 +19,11 @@ def generate_equation():
         equation = f"{num1} {operator} {num2}"
         evaluate = eval(equation)
         result = round(evaluate, 3)
-        questions.append(equation)
-        answers.append(result)
+
+        if result not in unique_results:
+            unique_results.add(result)
+            questions.append(equation)
+            answers.append(result)
 
     return questions, answers
 
