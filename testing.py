@@ -31,7 +31,8 @@ class MainWidget(GridLayout):
     def __init__(self, **kwargs):
         super(MainWidget, self).__init__(**kwargs)
         self.restart_game()
-
+        ###AddedCode- Start the game timer
+        Clock.schedule_interval(self.update_timer, 1)
     def generate(self, id):
         btn = self.ids[id]
         btn_text = btn.text
@@ -45,8 +46,6 @@ class MainWidget(GridLayout):
         MainWidget.prev_btn = btn
         # AddedCode Display the game duration after button push
         print("Game Duration:", self.game_duration)
-        ###AddedCode- Start the game timer
-        Clock.schedule_interval(self.update_timer, 1)
 
     ###Added Code
     def on_start(self):
