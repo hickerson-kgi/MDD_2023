@@ -85,10 +85,10 @@ class MainWidget(GridLayout):
         for j in range(len(right_ids)):
             self.ids[right_ids[j]].text = str(answers[answer_order[j]])
 
-class MindfulMatchup1App(App):
+class Testing(App):
     def build(self):
         return MainWidget()
 
 
 if __name__ == '__main__':
-    MindfulMatchup1App().run()
+    Testing().run()
