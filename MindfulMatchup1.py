@@ -26,8 +26,6 @@ def generate_equation():
 class MainWidget(GridLayout):
 
     def __init__(self, **kwargs):
-        self.selected_question = None  # Store the currently selected equation button
-        self.selected_answer = None  # Store the currently selected solution button
         self.matching_colors = []  # Store random matching colors for button pairs
 
         super(MainWidget, self).__init__(**kwargs)
@@ -43,21 +41,24 @@ class MainWidget(GridLayout):
             self.ids[right_ids[j]].text = str(self.answers[answer_order[j]])
 
     def generate(self, id):
+        self.selected_question = None
+        self.selected_answer = None
+
         if id.startswith("1"):
-            self.selected_question = id
+            self.selected_question = self.ids[id].text
         else:
-            self.selected_answer = id
+            self.selected_answer = self.ids[id].text
 
         self.matching_colors = [Color(random.random(), random.random(), random.random(), 1) for _ in
                                 range(len(self.questions))]
 
-        if self.questions.index(self.selected_question.text) == self.answers.index(self.selected_answer.text):
-            matching_color_equation = self.matching_colors[self.questions.index(self.selected_question.text)]
-            self.selected_equation.background_color = matching_color_equation.rgba
-            matching_color_solution = self.matching_colors[self.answers.index(self.selected_answer.text)]
-            self.selected_solution.background_color = matching_color_solution.rgba
-            self.selected_equation = None
-            self.selected_solution = None
+        if self.questions.index(self.selected_question) == self.answers.index(self.selected_answer):
+            matching_color_question = self.matching_colors[self.questions.index(self.selected_question)]
+            self.selected_question.background_color = matching_color_question.rgba
+            matching_color_answer = self.matching_colors[self.answers.index(self.selected_answer)]
+            self.selected_answer.background_color = matching_color_answer.rgba
+            self.selected_question = None
+            self.selected_answer = None
         else:
             # Incorrect match
             self.selected_question.background_color = (1, 0, 0, 1)
@@ -65,10 +66,10 @@ class MainWidget(GridLayout):
             Clock.schedule_once(self.reset_colors, 1)  # Reset colors after 1 second
 
     def reset_colors(self, dt):
-            self.selected_equation.background_color = (1, 1, 1, 1)
-            self.selected_solution.background_color = (1, 1, 1, 1)
-            self.selected_equation = None
-            self.selected_solution = None
+            self.selected_question.background_color = (1, 1, 1, 1)
+            self.selected_answer.background_color = (1, 1, 1, 1)
+            self.selected_question = None
+            self.selected_answer = None
 
     def answer(self, id):
         self.ids[id].background_color = (1, 1, 1, 1)

@@ -37,7 +37,6 @@ def get_solutions(equations):
 class MainWidget(GridLayout):
     def __init__(self, **kwargs):
         super(MainWidget, self).__init__(**kwargs)
-        self.cols = 2  # Set the number of columns for the grid layout
         self.equation_buttons = []  # Store equation buttons separately
         self.solution_buttons = []  # Store solution buttons separately
         self.selected_equation = None  # Store the currently selected equation button
