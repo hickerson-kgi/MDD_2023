@@ -7,6 +7,7 @@ from kivy.clock import Clock
 
 
 def generate_equation():
+
     questions = []
     answers = []
     unique_results = set()  # Keep track of unique results
@@ -31,51 +32,81 @@ def generate_equation():
 class MainWidget(GridLayout):
 
     def __init__(self, **kwargs):
-        self.matching_colors = []  # Store random matching colors for button pairs
 
         super(MainWidget, self).__init__(**kwargs)
         self.questions, self.answers = generate_equation()
-        answer_order = [0, 1, 2, 3]
+ 
+        self.matching_colors = [(1,0,0,1), (1,1,0,1), (0,0,1,1), (0,1,0,1)]  # Store random matching colors for button pairs
+        self.matches = 0
 
-        left_ids = ['1a_btn', '1b_btn', '1c_btn', '1d_btn']
-        for i in range(len(left_ids)):
-            self.ids[left_ids[i]].text = str(self.questions[i])
-        right_ids = ['2a_btn', '2b_btn', '2c_btn', '2d_btn']
-        random.shuffle(answer_order)
-        for j in range(len(right_ids)):
-            self.ids[right_ids[j]].text = str(self.answers[answer_order[j]])
-        self.questions.append('0')
-        self.answers.append('0')
+        self.left_ids = ['0q_btn', '1q_btn', '2q_btn', '3q_btn']  
+        for i in range(len(self.left_ids)):
+            self.ids[self.left_ids[i]].text = str(self.questions[i])
+    
+        self.right_ids = ['0a_btn', '1a_btn', '2a_btn', '3a_btn']
+        self.answer_order = [0, 1, 2, 3]
+        random.shuffle(self.answer_order)
+        for j in range(len(self.right_ids)):
+            self.ids[self.right_ids[j]].text = str(self.answers[self.answer_order[j]])
+
+        for id in self.left_ids:
+            self.ids[id].background_color = (0.5, 0.5, 0.5, 1)
+
+        for id in self.right_ids:
+            self.ids[id].background_color = (0.5, 0.5, 0.5, 1)
+
+        self.selected_question = False
+        self.selected_answer = False
 
     def generate(self, id):
+        # print('prev:', self.selected_question, self.selected_answer)
 
-        if id.startswith("1"):
-            self.selected_question = self.ids[id].text
-            self.selected_answer = '0'
-        else:
-            self.selected_answer = self.ids[id].text
-            self.selected_question = '0'
+        # indicates left side, i.e. question
+        if id[1] == 'q':
+            self.selected_question = id
 
-        if self.selected_question && self.selected_answer != '0':
-            self.set_colors(self.selected_question, self.selected_answer)
+            # for i in self.left_ids:
+                # self.ids[i].background_color = (0.5, 0.5, 0.5, 1)
 
-    def set_colors(self):
-        #self.matching_colors = [Color(random.random(), random.random(), random.random(), 1) for _ in
-                                #range(len(self.questions))]
+            self.ids[id].background_color = (0.9, 0.9, 0.9, 1)
 
-        if self.questions.index(self.selected_question) == self.answers.index(self.selected_answer):
+        # indicates right side, i.e. answer
+        if id[1] == 'a':
+            self.selected_answer = id
 
-            #matching_color_question = self.matching_colors[self.questions.index(self.selected_question)]
-            #self.selected_question.background_color = matching_color_question.rgba
-            #matching_color_answer = self.matching_colors[self.answers.index(self.selected_answer)]
-            #self.selected_answer.background_color = matching_color_answer.rgba
-            #self.selected_question = None
-            #self.selected_answer = None
-        else:
-            # Incorrect match
-            self.selected_question.background_color = (1, 0, 0, 1)
-            self.selected_answer.background_color = (1, 0, 0, 1)
-            Clock.schedule_once(self.reset_colors, 1)  # Reset colors after 1 second
+            # for i in self.right_ids:
+            #     self.ids[i].background_color = (0.5, 0.5, 0.5, 1)
+
+            self.ids[id].background_color = (0.9, 0.9, 0.9, 1)
+
+        print('curr:', self.selected_question, self.selected_answer)
+
+        # if there are now two selections, question and answer
+        if (self.selected_question != False) and (self.selected_answer != False):
+        
+            q_index = int(self.selected_question[0])
+            a_button = int(self.selected_answer[0])
+            a_index = self.answer_order[a_button]
+
+            print(q_index, a_button, a_index)
+            # Deterimine if the question and answer are a matching pair
+            if q_index == a_index:
+                print('CORRECT!')
+                # change BOTH buttons to color
+                current_color = self.matching_colors[self.matches]
+                self.ids[str(q_index)+'q_btn'].background_color = current_color # question button
+                self.ids[str(a_button)+'a_btn'].background_color = current_color # answer button
+
+                self.matches += 1
+                self.matches = self.matches%4
+       
+            else:
+                self.selected_question = False
+                self.selected_answer = False
+
+            self.selected_question = False
+            self.selected_answer = False
+
 
     def reset_colors(self, dt):
             self.selected_question.background_color = (1, 1, 1, 1)
@@ -83,27 +114,24 @@ class MainWidget(GridLayout):
             self.selected_question = None
             self.selected_answer = None
 
-    def answer(self, id):
-        self.ids[id].background_color = (1, 1, 1, 1)
-
     def restart_game(self):
         questions, answers = generate_equation()
-        answer_order = [0, 1, 2, 3]
+        self.answer_order = [0, 1, 2, 3]
 
-        left_ids = ['1a_btn', '1b_btn', '1c_btn', '1d_btn']
-        for i in range(len(left_ids)):
-            btn = self.ids[left_ids[i]]
+        self.selected_question = False
+        self.selected_answer = False
+        self.matches = 0
+        
+        for i in range(len(self.left_ids)):
+            btn = self.ids[self.left_ids[i]]
             btn.text = str(questions[i])
             btn.background_color = (0.5, 0.5, 0.5, 1)
 
-        right_ids = ['2a_btn', '2b_btn', '2c_btn', '2d_btn']
-        random.shuffle(answer_order)
-        for j in range(len(right_ids)):
-            btn = self.ids[right_ids[j]]
-            btn.text = str(answers[answer_order[j]])
+        random.shuffle(self.answer_order)
+        for j in range(len(self.right_ids)):
+            btn = self.ids[self.right_ids[j]]
+            btn.text = str(answers[self.answer_order[j]])
             btn.background_color = (0.5, 0.5, 0.5, 1)
-
-        MainWidget.prev_btn = None
 
 
 class MindfulMatchup1App(App):
