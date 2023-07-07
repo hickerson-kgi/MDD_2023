@@ -64,6 +64,11 @@ class MainWidget(GridLayout):
 
         # indicates left side, i.e. question
         if id[1] == 'q':
+
+            #Unhighlights previous question if a new question is selected
+            if self.selected_question != False:
+                self.ids[self.selected_question].background_color = (0.5, 0.5, 0.5, 1)
+
             self.selected_question = id
 
             # for i in self.left_ids:
@@ -73,6 +78,11 @@ class MainWidget(GridLayout):
 
         # indicates right side, i.e. answer
         if id[1] == 'a':
+
+            # Unhighlights previous answer if a new answer is selected
+            if self.selected_answer != False:
+                self.ids[str(self.selected_answer[0])+'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
+
             self.selected_answer = id
 
             # for i in self.right_ids:
@@ -102,6 +112,8 @@ class MainWidget(GridLayout):
                 self.matches = self.matches%4
        
             else:
+                self.ids[str(q_index)+'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
+                self.ids[str(a_button)+'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
                 self.selected_question = False
                 self.selected_answer = False
 
@@ -116,8 +128,6 @@ class MainWidget(GridLayout):
             self.selected_question = None
             self.selected_answer = None
 
-    def answer(self, id):
-        self.ids[id].background_color = (1, 1, 1, 1)
 
     def restart_game(self):
         questions, answers = generate_equation()
