@@ -36,7 +36,7 @@ class MainWidget(GridLayout):
         super(MainWidget, self).__init__(**kwargs)
         self.questions, self.answers = generate_equation()
  
-        self.matching_colors = [(1,0,0,1), (1,1,0,1), (0,0,1,1), (0,1,0,1)]  # Store random matching colors for button pairs
+        self.matching_colors = [(1,0, 0.5, 1), (1,1,0,1), (0,0,1,1), (0,1,0,1)]  # Store random matching colors for button pairs
         self.matches = 0
 
         self.left_ids = ['0q_btn', '1q_btn', '2q_btn', '3q_btn']  
