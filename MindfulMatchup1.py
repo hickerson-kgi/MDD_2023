@@ -58,9 +58,9 @@ class MainWidget(GridLayout):
         self.selected_question = False
         self.selected_answer = False
 
+
     # Function to handle button click events
     def generate(self, id):
-        # print('prev:', self.selected_question, self.selected_answer)
 
         # indicates left side, i.e. question
         if id[1] == 'q':
@@ -90,8 +90,6 @@ class MainWidget(GridLayout):
             if self.ids[id].background_color == [0.5, 0.5, 0.5, 1]:
                 self.ids[id].background_color = (0.9, 0.9, 0.9, 1)
 
-        print('curr:', self.selected_question, self.selected_answer)
-
         # if there are now two selections, question and answer
         if (self.selected_question != False) and (self.selected_answer != False):
         
@@ -99,22 +97,33 @@ class MainWidget(GridLayout):
             a_button = int(self.selected_answer[0])
             a_index = self.answer_order[a_button]
 
-            print(q_index, a_button, a_index)
-            # Deterimine if the question and answer are a matching pair
-            if q_index == a_index:
-                # change BOTH buttons to color
-                current_color = self.matching_colors[self.matches]
-                self.ids[str(q_index)+'q_btn'].background_color = current_color # question button
-                self.ids[str(a_button)+'a_btn'].background_color = current_color # answer button
+            # Determine if the selected question and answer are both matched already
+            self.colored = False
 
-                self.matches += 1
-                self.matches = self.matches%4
-       
-            else:
-                self.ids[str(q_index)+'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                self.ids[str(a_button)+'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                self.selected_question = False
-                self.selected_answer = False
+            for i in range(len(self.matching_colors)):
+                if tuple(self.ids[str(q_index) + 'q_btn'].background_color) == self.matching_colors[i]:
+                    self.colored = True
+                if tuple(self.ids[str(a_button) + 'a_btn'].background_color) == self.matching_colors[i]:
+                    self.colored = True
+
+            # only change color of buttons that have not been matched already
+            if self.colored == False:
+
+                # Deterimine if the question and answer are a matching pair
+                if q_index == a_index:
+                    # change BOTH buttons to color
+                    current_color = self.matching_colors[self.matches]
+                    self.ids[str(q_index)+'q_btn'].background_color = current_color # question button
+                    self.ids[str(a_button)+'a_btn'].background_color = current_color # answer button
+
+                    self.matches += 1
+                    self.matches = self.matches%4
+
+                else:
+                    self.ids[str(q_index)+'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
+                    self.ids[str(a_button)+'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
+                    self.selected_question = False
+                    self.selected_answer = False
 
             self.selected_question = False
             self.selected_answer = False
