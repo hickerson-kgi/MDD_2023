@@ -67,15 +67,13 @@ class MainWidget(GridLayout):
 
             #Unhighlights previous question if a new question is selected
             if self.selected_question != False:
-                if self.ids[self.selected_question].background_color == (0.9, 0.9, 0.9, 1):
+                if self.ids[self.selected_question].background_color == [0.9, 0.9, 0.9, 1]:
                     self.ids[self.selected_question].background_color = (0.5, 0.5, 0.5, 1)
 
             self.selected_question = id
 
-            # for i in self.left_ids:
-                # self.ids[i].background_color = (0.5, 0.5, 0.5, 1)
-
-            if self.ids[id].background_color == (0.5, 0.5, 0.5, 1):
+            # highlight selected answer if it is not matched yet
+            if self.ids[id].background_color == [0.5, 0.5, 0.5, 1]:
                 self.ids[id].background_color = (0.9, 0.9, 0.9, 1)
 
         # indicates right side, i.e. answer
@@ -83,15 +81,13 @@ class MainWidget(GridLayout):
 
             # Unhighlights previous answer if a new answer is selected
             if self.selected_answer != False:
-                if self.ids[str(self.selected_answer[0])+'a_btn'].background_color == (0.9, 0.9, 0.9, 1):
+                if self.ids[str(self.selected_answer[0])+'a_btn'].background_color == [0.9, 0.9, 0.9, 1]:
                     self.ids[str(self.selected_answer[0])+'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
 
             self.selected_answer = id
 
-            # for i in self.right_ids:
-            #     self.ids[i].background_color = (0.5, 0.5, 0.5, 1)
-
-            if self.ids[id].background_color == (0.5, 0.5, 0.5, 1):
+            # highlight selected answer if it is not matched yet
+            if self.ids[id].background_color == [0.5, 0.5, 0.5, 1]:
                 self.ids[id].background_color = (0.9, 0.9, 0.9, 1)
 
         print('curr:', self.selected_question, self.selected_answer)
