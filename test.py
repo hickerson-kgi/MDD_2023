@@ -124,7 +124,7 @@ class MainWidget(GridLayout):
         # AddedCode Display the game duration after button push
         print("Game Duration:", self.game_duration,"seconds")
         # Update the false count button text
-        #self.ids.false_count_btn.text = f"False Count: {self.false_count}"
+        self.ids.false_count_btn.text = f"False Count: {self.false_count}"
         ###Added Code
         # Check if all matches have been made
         if self.matches == 4:
@@ -173,11 +173,11 @@ class MainWidget(GridLayout):
         self.answer_order = [0, 1, 2, 3]
 
         ##### ADDED CODE FOR SCORE COUNT
-      #  self.false_count = 0  # Reset false count
-      #  self.correct_count = 0  # Reset correct count
+        self.false_count = 0  # Reset false count
+        self.correct_count = 0  # Reset correct count
 
         # Update the false count button text
-      #  self.ids.false_count_btn.text = f"False Count: {self.false_count}"
+        self.ids.false_count_btn.text = f"False Count: {self.false_count}"
 
         #ADDED CODE- Reset the game logic
         self.selected_question = False
