@@ -7,22 +7,29 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 
-button_pin = 12
+button1_pin = 12
+button2_pin = 16
 
-GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button1_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button2_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 class LightingGrid(GridLayout):
     def button_pressed(self, button):
-        if button.text == "Button 1":
-            self.parent.on_button_press("red")
+        self.parent.on_button_press(button.text)
 
 class LightingScreen(Screen):
     def __init__(self, **kwargs):
         super(LightingScreen, self).__init__(**kwargs)
         self.add_widget(LightingGrid())
 
-    def on_button_press(self, color):
-        self.ids.light_button.background_color = color
+    def on_button_press(self, button_text):
+        if button_text == "Button 1":
+            self.ids.light_button1.background_color = (1, 0, 0, 1)  # Set background color to red
+        elif button_text == "Button 2":
+            self.ids.light_button2.background_color = (1, 0, 0, 1)  # Set background color to red
+        else:
+            self.ids.light_button1.background_color = (0, 0, 0, 1)  # Reset background color
+            self.ids.light_button2.background_color = (0, 0, 0, 1)  # Reset background color
 
 class MyApp(App):
     def build(self):
@@ -30,11 +37,20 @@ class MyApp(App):
         sm.add_widget(LightingScreen(name="lighting"))
         return sm
 
-def on_pushbutton_press(channel):
-    if GPIO.input(button_pin) == GPIO.LOW:
-        app.root.get_screen("lighting").on_button_press("red")
+def on_pushbutton1_press(channel):
+    if GPIO.input(button1_pin) == GPIO.LOW:
+        app.root.get_screen("lighting").on_button_press("Button 1")  # Set Button 1 as pressed
+    else:
+        app.root.get_screen("lighting").on_button_press("")  # Reset button state
 
-GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=on_pushbutton_press, bouncetime=300)
+def on_pushbutton2_press(channel):
+    if GPIO.input(button2_pin) == GPIO.LOW:
+        app.root.get_screen("lighting").on_button_press("Button 2")  # Set Button 2 as pressed
+    else:
+        app.root.get_screen("lighting").on_button_press("")  # Reset button state
+
+GPIO.add_event_detect(button1_pin, GPIO.BOTH, callback=on_pushbutton1_press, bouncetime=300)
+GPIO.add_event_detect(button2_pin, GPIO.BOTH, callback=on_pushbutton2_press, bouncetime=300)
 
 if __name__ == '__main__':
     app = MyApp()
@@ -43,21 +59,22 @@ if __name__ == '__main__':
 
 
 
-
-
-
 <LightingGrid>:
     cols: 2
     Button:
+        id: button1
         text: "Button 1"
         on_press: root.button_pressed(self)
     Button:
+        id: button2
         text: "Button 2"
         on_press: root.button_pressed(self)
     Button:
+        id: button3
         text: "Button 3"
         on_press: root.button_pressed(self)
     Button:
+        id: button4
         text: "Button 4"
         on_press: root.button_pressed(self)
 
@@ -67,9 +84,19 @@ if __name__ == '__main__':
         LightingGrid:
 
         Button:
-            id: light_button
-            text: "Light"
+            id: light_button1
+            text: "Light 1"
             size_hint_y: None
             height: dp(50)
             background_color: 0, 0, 0, 1  # Initial color is black
+
+        Button:
+            id: light_button2
+            text: "Light 2"
+            size_hint_y: None
+            height: dp(50)
+            background_color: 0, 0, 0, 1  # Initial color is black
+
+
+
 
