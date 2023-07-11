@@ -1,8 +1,10 @@
+
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
-import random
-from kivy.graphics import Color
 from kivy.clock import Clock
+import random
+
+
 
 # Function to generate random arithmetic equations
 def generate_equation():
@@ -34,6 +36,7 @@ class MainCode(GridLayout):
     def __init__(self, **kwargs):
 
         super(MainCode, self).__init__(**kwargs)
+        self.cols = 2
         self.questions, self.answers = generate_equation()
 
         self.matching_colors = [(1, 0, 0.5, 1), (1, 1, 0, 1), (0, 0, 1, 1), (0, 1, 0, 1)]  # Store random matching colors for button pairs
