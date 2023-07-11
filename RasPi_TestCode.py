@@ -13,20 +13,23 @@ GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 class LightingScreen(Screen):
     def __init__(self, **kwargs):
         super(LightingScreen, self).__init__(**kwargs)
-        self.add_widget(Button(text="Screen Lighting"))
+        self.button = Button(text="Screen Lighting")
+        self.button.bind(on_press=self.on_button_press)
+        self.add_widget(self.button)
+
+    def on_button_press(self, instance):
+        self.button.text = "Button Pressed"
 
 class MyApp(App):
     def build(self):
         sm = ScreenManager()
-        lighting_screen = LightingScreen(name="lighting")
-        sm.add_widget(lighting_screen)
-
-        def on_pushbutton_press(channel):
-            sm.current = "lighting"
-
-        GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=on_pushbutton_press, bouncetime=300)
-
+        sm.add_widget(LightingScreen(name="lighting"))
         return sm
+
+def on_pushbutton_press(channel):
+    app.root.get_screen("lighting").on_button_press(None)
+
+GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=on_pushbutton_press, bouncetime=300)
 
 if __name__ == '__main__':
     app = MyApp()
