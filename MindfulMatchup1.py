@@ -79,6 +79,7 @@ class MainWidget(GridLayout):
         # indicates right side, i.e. answer
         if id[1] == 'a':
 
+
             # Unhighlights previous answer if a new answer is selected
             if self.selected_answer != False:
                 if self.ids[str(self.selected_answer[0])+'a_btn'].background_color == [0.9, 0.9, 0.9, 1]:
