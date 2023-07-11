@@ -25,11 +25,16 @@ class LightingScreen(Screen):
     def on_button_press(self, button_text):
         if button_text == "Button 1":
             self.ids.light_button1.background_color = (1, 0, 0, 1)  # Set background color to red
+            self.ids.light_button2.background_color = (0, 0, 0, 1)  # Reset background color
         elif button_text == "Button 2":
+            self.ids.light_button1.background_color = (0, 0, 0, 1)  # Reset background color
             self.ids.light_button2.background_color = (1, 0, 0, 1)  # Set background color to red
         else:
             self.ids.light_button1.background_color = (0, 0, 0, 1)  # Reset background color
             self.ids.light_button2.background_color = (0, 0, 0, 1)  # Reset background color
+
+    def light_button_pressed(self, button):
+        button.background_color = (1, 0, 0, 1)  # Set background color to red
 
 class MyApp(App):
     def build(self):
@@ -83,20 +88,12 @@ if __name__ == '__main__':
         orientation: 'vertical'
         LightingGrid:
 
-        Button:
-            id: light_button1
-            text: "Light 1"
-            size_hint_y: None
-            height: dp(50)
-            background_color: 0, 0, 0, 1  # Initial color is black
-
-        Button:
-            id: light_button2
-            text: "Light 2"
-            size_hint_y: None
-            height: dp(50)
-            background_color: 0, 0, 0, 1  # Initial color is black
-
-
-
-
+        BoxLayout:
+            Button:
+                id: light_button1
+                text: "Light 1"
+                on_press: root.light_button_pressed(self)
+            Button:
+                id: light_button2
+                text: "Light 2"
+                on_press: root.light_button_pressed(self)
