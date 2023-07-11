@@ -60,3 +60,16 @@ if __name__ == '__main__':
     Button:
         text: "Button 4"
         on_press: root.button_pressed(self)
+
+<LightingScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        LightingGrid:
+
+        Button:
+            id: light_button
+            text: "Light"
+            size_hint_y: None
+            height: dp(50)
+            background_color: 0, 0, 0, 1  # Initial color is black
+
