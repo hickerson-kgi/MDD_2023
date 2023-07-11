@@ -15,16 +15,18 @@ class LightingScreen(Screen):
         super(LightingScreen, self).__init__(**kwargs)
         self.add_widget(Button(text="Screen Lighting"))
 
-def on_pushbutton_press(channel):
-    app.root.current = "lighting"
-
 class MyApp(App):
     def build(self):
         sm = ScreenManager()
-        sm.add_widget(LightingScreen(name="lighting"))
-        return sm
+        lighting_screen = LightingScreen(name="lighting")
+        sm.add_widget(lighting_screen)
 
-GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=on_pushbutton_press, bouncetime=300)
+        def on_pushbutton_press(channel):
+            sm.current = "lighting"
+
+        GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=on_pushbutton_press, bouncetime=300)
+
+        return sm
 
 if __name__ == '__main__':
     app = MyApp()
