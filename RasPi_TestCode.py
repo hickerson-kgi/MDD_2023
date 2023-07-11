@@ -27,9 +27,10 @@ class MyApp(App):
         return sm
 
 def on_pushbutton_press(channel):
-    app.root.get_screen("lighting").on_button_press(None)
+    if GPIO.input(button_pin) == GPIO.LOW:
+        app.root.get_screen("lighting").on_button_press(None)
 
-GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=on_pushbutton_press, bouncetime=300)
+GPIO.add_event_detect(button_pin, GPIO.BOTH, callback=on_pushbutton_press, bouncetime=300)
 
 if __name__ == '__main__':
     app = MyApp()
