@@ -7,11 +7,11 @@ import RPi.GPIO as GPIO
 
 # Configure GPIO pins
 GPIO.setmode(GPIO.BCM)
-button1_pin = 17
-button2_pin = 18
-button3_pin = 19
-button4_pin = 20
-button5_pin = 21
+button1_pin = 16
+button2_pin = 22
+button3_pin = 25
+button4_pin = 6
+button5_pin = 24
 
 
 # Function to generate random arithmetic equations
