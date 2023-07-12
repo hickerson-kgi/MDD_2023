@@ -8,10 +8,8 @@ import RPi.GPIO as GPIO
 # Configure GPIO pins
 GPIO.setmode(GPIO.BCM)
 button1_pin = 16
-button2_pin = 26
-GPIO.setup(button1_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button2_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
+button2_pin = 22
+button3_pin = 25
 
 # Function to generate random arithmetic equations
 def generate_equation():
@@ -153,11 +151,18 @@ def button_callback(channel):
         App.get_running_app().root.generate('0q_btn')  # Replace with the corresponding button ID
     elif channel == button2_pin:
         App.get_running_app().root.generate('1q_btn')  # Replace with the corresponding button ID
+    elif channel == button3_pin:
+        App.get_running_app().root.generate('2q_btn')  # Replace with the corresponding button ID
 
 
 # Set up button event detection
+GPIO.setup(button1_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button2_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button3_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
 GPIO.add_event_detect(button1_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 GPIO.add_event_detect(button2_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button3_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 
 
 # Run the Kivy application
