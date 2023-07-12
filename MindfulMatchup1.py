@@ -4,8 +4,8 @@ from kivy.uix.button import Button
 import random
 from kivy.graphics import Color
 from kivy.clock import Clock
-import board
-import neopixel
+#import board
+#import neopixel
 #import board
 #import neopixel
 
@@ -75,7 +75,6 @@ class MainWidget(GridLayout):
                 if self.ids[self.selected_question].background_color == [0.9, 0.9, 0.9, 1]:
                     self.ids[self.selected_question].background_color = (0.5, 0.5, 0.5, 1)
 
-            #if self
             self.selected_question = id
 
             # highlight selected answer if it is not matched yet
@@ -123,9 +122,6 @@ class MainWidget(GridLayout):
                     current_color = self.matching_colors[self.matches]
                     self.ids[str(q_index)+'q_btn'].background_color = current_color # question button
                     self.ids[str(a_button)+'a_btn'].background_color = current_color # answer button
-                    #self.pixels = neopixel.NeoPixel(board.D6, 12)
-                    #self.pixels.fill((0, 255, 0))
-
 
                     self.matches += 1
                     self.matches = self.matches%4
@@ -133,28 +129,15 @@ class MainWidget(GridLayout):
                 else:
                     self.ids[str(q_index) + 'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
                     self.ids[str(a_button) + 'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                    self.selected_question = False
-                    self.selected_answer = False
+
 
             elif (self.acolored == True) and (self.qcolored == False):
                 self.ids[str(q_index) + 'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                self.selected_question = False
-                self.selected_answer = False
+
 
             elif (self.qcolored == True) and (self.acolored == False):
                 self.ids[str(a_button) + 'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                self.selected_question = False
-                self.selected_answer = False
 
-            else:
-                self.selected_question = False
-                self.selected_answer = False
-
-            #else:
-            #    self.ids[str(q_index)+'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
-            #    self.ids[str(a_button)+'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
-            #    self.selected_question = False
-            #    self.selected_answer = False
 
             self.selected_question = False
             self.selected_answer = False

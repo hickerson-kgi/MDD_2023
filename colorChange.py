@@ -15,8 +15,11 @@ button2_pin = 22
 button3_pin = 25
 button4_pin = 6
 button5_pin = 24
+button6_pin = 4
+button7_pin = 23
+button8_pin = 17
 
-pin_list = [16,22,25,6,24]
+pin_list = [16,22,25,6,24,4,23,17]
 
 # Function to generate random arithmetic equations
 def generate_equation():
