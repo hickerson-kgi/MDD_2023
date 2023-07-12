@@ -50,8 +50,8 @@
         text: 'Restart'
         on_release: root.restart_game()
 
-
 # Run the Kivy application
 <Demi>:
     def build(self):
+        GPIO.setup(button1_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         return MainCode()
