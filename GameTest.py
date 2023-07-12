@@ -7,7 +7,11 @@ import RPi.GPIO as GPIO
 
 # Configure GPIO pins
 GPIO.setmode(GPIO.BCM)
-button_pins = [16, 26, 6, 17]
+button1_pin = 16
+button2_pin = 26
+GPIO.setup(button1_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button2_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
 
 # Function to generate random arithmetic equations
 def generate_equation():
@@ -145,24 +149,15 @@ class MainCode(GridLayout):
 
 # Function to handle button click events
 def button_callback(channel):
-    button_id = None
-    if channel == button_pins[0]:
-        button_id = '0q_btn'
-    elif channel == button_pins[1]:
-        button_id = '1q_btn'
-    elif channel == button_pins[2]:
-        button_id = '2q_btn'
-    elif channel == button_pins[3]:
-        button_id = '3q_btn'
-
-    if button_id is not None:
-        App.get_running_app().root.generate(button_id)
+    if channel == button1_pin:
+        App.get_running_app().root.generate('0q_btn')  # Replace with the corresponding button ID
+    elif channel == button2_pin:
+        App.get_running_app().root.generate('1q_btn')  # Replace with the corresponding button ID
 
 
 # Set up button event detection
-for pin in button_pins:
-    GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.add_event_detect(pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button1_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button2_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 
 
 # Run the Kivy application
