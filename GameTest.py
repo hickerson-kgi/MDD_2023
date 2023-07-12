@@ -100,16 +100,19 @@ class MainCode(GridLayout):
             a_index = self.answer_order[a_button]
 
             # Determine if the selected question and answer are both matched already
-            self.colored = False
+            self.qcolored = False
+            self.acolored = False
+
             for i in range(len(self.matching_colors)):
                 if tuple(self.ids[str(q_index) + 'q_btn'].background_color) == self.matching_colors[i]:
-                    self.colored = True
+                    self.qcolored = True
                 if tuple(self.ids[str(a_button) + 'a_btn'].background_color) == self.matching_colors[i]:
-                    self.colored = True
+                    self.acolored = True
 
             # only change color of buttons that have not been matched already
-            if self.colored == False:
-                # Determine if the question and answer are a matching pair
+            if (self.acolored == False) and (self.qcolored == False):
+
+                # Deterimine if the question and answer are a matching pair
                 if q_index == a_index:
                     # change BOTH buttons to color
                     current_color = self.matching_colors[self.matches]
@@ -125,8 +128,19 @@ class MainCode(GridLayout):
                     self.selected_question = False
                     self.selected_answer = False
 
-            self.selected_question = False
-            self.selected_answer = False
+            elif (self.acolored == True) and (self.qcolored == False):
+                self.ids[str(q_index) + 'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
+                self.selected_question = False
+                self.selected_answer = False
+
+            elif (self.qcolored == True) and (self.acolored == False):
+                self.ids[str(a_button) + 'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
+                self.selected_question = False
+                self.selected_answer = False
+
+            else:
+                self.selected_question = False
+                self.selected_answer = False
 
     def restart_game(self):
         questions, answers = generate_equation()
