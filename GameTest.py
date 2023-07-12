@@ -17,7 +17,6 @@ button7_pin = 23
 button8_pin = 17
 
 
-
 # Function to generate random arithmetic equations
 def generate_equation():
     questions = []
@@ -104,19 +103,16 @@ class MainCode(GridLayout):
             a_index = self.answer_order[a_button]
 
             # Determine if the selected question and answer are both matched already
-            self.qcolored = False
-            self.acolored = False
-
+            self.colored = False
             for i in range(len(self.matching_colors)):
                 if tuple(self.ids[str(q_index) + 'q_btn'].background_color) == self.matching_colors[i]:
-                    self.qcolored = True
+                    self.colored = True
                 if tuple(self.ids[str(a_button) + 'a_btn'].background_color) == self.matching_colors[i]:
-                    self.acolored = True
+                    self.colored = True
 
             # only change color of buttons that have not been matched already
-            if (self.acolored == False) and (self.qcolored == False):
-
-                # Deterimine if the question and answer are a matching pair
+            if self.colored == False:
+                # Determine if the question and answer are a matching pair
                 if q_index == a_index:
                     # change BOTH buttons to color
                     current_color = self.matching_colors[self.matches]
@@ -132,19 +128,8 @@ class MainCode(GridLayout):
                     self.selected_question = False
                     self.selected_answer = False
 
-            elif (self.acolored == True) and (self.qcolored == False):
-                self.ids[str(q_index) + 'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                self.selected_question = False
-                self.selected_answer = False
-
-            elif (self.qcolored == True) and (self.acolored == False):
-                self.ids[str(a_button) + 'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                self.selected_question = False
-                self.selected_answer = False
-
-            else:
-                self.selected_question = False
-                self.selected_answer = False
+            self.selected_question = False
+            self.selected_answer = False
 
     def restart_game(self):
         questions, answers = generate_equation()
@@ -177,7 +162,13 @@ def button_callback(channel):
     elif channel == button4_pin:
         App.get_running_app().root.generate('3q_btn')  # Replace with the corresponding button ID
     elif channel == button5_pin:
-        App.get_running_app().root.generate('4q_btn')  # Replace with the corresponding button ID
+        App.get_running_app().root.generate('0a_btn')  # Replace with the corresponding button ID
+    elif channel == button6_pin:
+        App.get_running_app().root.generate('1a_btn')  # Replace with the corresponding button ID
+    elif channel == button7_pin:
+        App.get_running_app().root.generate('2a_btn')  # Replace with the corresponding button ID
+    elif channel == button8_pin:
+        App.get_running_app().root.generate('3a_btn')  # Replace with the corresponding button ID
 
 
 # Set up button event detection
@@ -186,12 +177,18 @@ GPIO.setup(button2_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(button3_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(button4_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(button5_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button6_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button7_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button8_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 GPIO.add_event_detect(button1_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 GPIO.add_event_detect(button2_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 GPIO.add_event_detect(button3_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 GPIO.add_event_detect(button4_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 GPIO.add_event_detect(button5_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button6_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button7_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button8_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 
 
 # Run the Kivy application
