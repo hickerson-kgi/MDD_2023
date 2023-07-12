@@ -4,6 +4,8 @@ from kivy.uix.button import Button
 import random
 from kivy.graphics import Color
 from kivy.clock import Clock
+import board
+import neopixel
 #import board
 #import neopixel
 
@@ -147,7 +149,7 @@ class MainWidget(GridLayout):
             else:
                 self.selected_question = False
                 self.selected_answer = False
-                
+
             #else:
             #    self.ids[str(q_index)+'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
             #    self.ids[str(a_button)+'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
