@@ -7,15 +7,7 @@ import RPi.GPIO as GPIO
 
 # Configure GPIO pins
 GPIO.setmode(GPIO.BCM)
-button1_pin = 16
-button2_pin = 22
-button3_pin = 25
-button4_pin = 6
-button5_pin = 24
-button6_pin = 4
-button7_pin = 23
-button8_pin = 17
-
+button_pins = [16, 22, 25, 6, 24, 4, 23, 17]
 
 
 # Function to generate random arithmetic equations
@@ -104,19 +96,16 @@ class MainCode(GridLayout):
             a_index = self.answer_order[a_button]
 
             # Determine if the selected question and answer are both matched already
-            self.qcolored = False
-            self.acolored = False
-
+            self.colored = False
             for i in range(len(self.matching_colors)):
                 if tuple(self.ids[str(q_index) + 'q_btn'].background_color) == self.matching_colors[i]:
-                    self.qcolored = True
+                    self.colored = True
                 if tuple(self.ids[str(a_button) + 'a_btn'].background_color) == self.matching_colors[i]:
-                    self.acolored = True
+                    self.colored = True
 
             # only change color of buttons that have not been matched already
-            if (self.acolored == False) and (self.qcolored == False):
-
-                # Deterimine if the question and answer are a matching pair
+            if self.colored == False:
+                # Determine if the question and answer are a matching pair
                 if q_index == a_index:
                     # change BOTH buttons to color
                     current_color = self.matching_colors[self.matches]
@@ -132,19 +121,8 @@ class MainCode(GridLayout):
                     self.selected_question = False
                     self.selected_answer = False
 
-            elif (self.acolored == True) and (self.qcolored == False):
-                self.ids[str(q_index) + 'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                self.selected_question = False
-                self.selected_answer = False
-
-            elif (self.qcolored == True) and (self.acolored == False):
-                self.ids[str(a_button) + 'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                self.selected_question = False
-                self.selected_answer = False
-
-            else:
-                self.selected_question = False
-                self.selected_answer = False
+            self.selected_question = False
+            self.selected_answer = False
 
     def restart_game(self):
         questions, answers = generate_equation()
@@ -168,30 +146,15 @@ class MainCode(GridLayout):
 
 # Function to handle button click events
 def button_callback(channel):
-    if channel == button1_pin:
-        App.get_running_app().root.generate('0q_btn')  # Replace with the corresponding button ID
-    elif channel == button2_pin:
-        App.get_running_app().root.generate('1q_btn')  # Replace with the corresponding button ID
-    elif channel == button3_pin:
-        App.get_running_app().root.generate('2q_btn')  # Replace with the corresponding button ID
-    elif channel == button4_pin:
-        App.get_running_app().root.generate('3q_btn')  # Replace with the corresponding button ID
-    elif channel == button5_pin:
-        App.get_running_app().root.generate('4q_btn')  # Replace with the corresponding button ID
+    button_id = button_pins.index(channel)
+    question_btn_id = str(button_id) + 'q_btn'
+    App.get_running_app().root.generate(question_btn_id)
 
 
 # Set up button event detection
-GPIO.setup(button1_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button2_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button3_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button4_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button5_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-GPIO.add_event_detect(button1_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-GPIO.add_event_detect(button2_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-GPIO.add_event_detect(button3_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-GPIO.add_event_detect(button4_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-GPIO.add_event_detect(button5_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+for pin in button_pins:
+    GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.add_event_detect(pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 
 
 # Run the Kivy application
