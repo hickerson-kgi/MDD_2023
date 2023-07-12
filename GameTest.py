@@ -4,7 +4,7 @@ import random
 from kivy.graphics import Color
 from kivy.clock import Clock
 import RPi.GPIO as GPIO
-
+#code
 # Configure GPIO pins
 GPIO.setmode(GPIO.BCM)
 button1_pin = 16
