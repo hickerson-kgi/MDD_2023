@@ -4,17 +4,10 @@ import random
 from kivy.graphics import Color
 from kivy.clock import Clock
 import RPi.GPIO as GPIO
-#code
+
 # Configure GPIO pins
 GPIO.setmode(GPIO.BCM)
-button1_pin = 16
-button2_pin = 22
-button3_pin = 25
-button4_pin = 6
-button5_pin = 24
-button6_pin = 4
-button7_pin = 23
-button8_pin = 17
+button_pins = [16, 22, 25, 6, 24, 4, 23, 17]
 
 
 # Function to generate random arithmetic equations
@@ -153,44 +146,17 @@ class MainCode(GridLayout):
 
 # Function to handle button click events
 def button_callback(channel):
-    if channel == button1_pin:
-        App.get_running_app().root.generate('0q_btn')  # Replace with the corresponding button ID
-    elif channel == button2_pin:
-        App.get_running_app().root.generate('1q_btn')  # Replace with the corresponding button ID
-    elif channel == button3_pin:
-        App.get_running_app().root.generate('2q_btn')  # Replace with the corresponding button ID
-    elif channel == button4_pin:
-        App.get_running_app().root.generate('3q_btn')  # Replace with the corresponding button ID
-    elif channel == button5_pin:
-        App.get_running_app().root.generate('0a_btn')  # Replace with the corresponding button ID
-    elif channel == button6_pin:
-        App.get_running_app().root.generate('1a_btn')  # Replace with the corresponding button ID
-    elif channel == button7_pin:
-        App.get_running_app().root.generate('2a_btn')  # Replace with the corresponding button ID
-    elif channel == button8_pin:
-        App.get_running_app().root.generate('3a_btn')  # Replace with the corresponding button ID
+    button_id = button_pins.index(channel)
+    question_btn_id = str(button_id) + 'q_btn'
+    App.get_running_app().root.generate(question_btn_id)
 
 
 # Set up button event detection
-GPIO.setup(button1_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button2_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button3_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button4_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button5_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button6_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button7_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button8_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+for pin in button_pins:
+    GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.add_event_detect(pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 
-GPIO.add_event_detect(button1_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-GPIO.add_event_detect(button2_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-GPIO.add_event_detect(button3_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-GPIO.add_event_detect(button4_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-GPIO.add_event_detect(button5_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-GPIO.add_event_detect(button6_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-GPIO.add_event_detect(button7_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-GPIO.add_event_detect(button8_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 
-#codebetterrun
 # Run the Kivy application
 class Demi(App):
     def build(self):
