@@ -1,5 +1,5 @@
 #start code
-
+#Imported modules
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 import random
