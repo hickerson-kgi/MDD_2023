@@ -3,7 +3,7 @@ from kivy.uix.gridlayout import GridLayout
 import random
 from kivy.graphics import Color
 from kivy.clock import Clock
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import board
 import neopixel
 
@@ -19,7 +19,7 @@ button6_pin = 4
 button7_pin = 23
 button8_pin = 17
 
-pin_list = [16,22,25,6,24,4,23,17]
+
 
 # Function to generate random arithmetic equations
 def generate_equation():
@@ -53,8 +53,10 @@ class MainCode(GridLayout):
         self.matching_colors = [(1, 0, 0.5, 1), (1, 1, 0, 1), (0, 0, 1, 1), (0, 1, 0, 1)]  # Store random matching colors for button pairs
         self.matches = 0
 
-        self.pin_list = [16, 22, 25, 6, 24]
-        self.matching_colors_neo = [(255, 0, 255), (255, 255, 0), (0, 255, 255), (50, 205, 50)]
+        #self.pin_list = [16,22,25,6,24,4,23,17]
+        self.matching_colors_neo_r = [255, 255, 0, 0]
+        self.matching_colors_neo_g = [0, 255, 255, 255]
+        self.matching_colors_neo_b = [255, 0, 255, 0]
 
         self.left_ids = ['0q_btn', '1q_btn', '2q_btn', '3q_btn']
         for i in range(len(self.left_ids)):
@@ -84,7 +86,7 @@ class MainCode(GridLayout):
             if self.selected_question != False:
                 if self.ids[self.selected_question].background_color == [0.9, 0.9, 0.9, 1]:
                     self.ids[self.selected_question].background_color = (0.5, 0.5, 0.5, 1)
-                    self.light_id(self.selected_question).fill(0, 255, 0)
+                    self.light_button(self.selected_question, 0, 0, 0)
 
 
             self.selected_question = id
@@ -92,7 +94,7 @@ class MainCode(GridLayout):
             # highlight selected answer if it is not matched yet
             if self.ids[id].background_color == [0.5, 0.5, 0.5, 1]:
                 self.ids[id].background_color = (0.9, 0.9, 0.9, 1)
-                self.light_id(id).fill(1,1,1)
+                self.light_button(id, 255, 255, 255)
 
         # indicates right side, i.e. answer
         if id[1] == 'a':
@@ -100,7 +102,7 @@ class MainCode(GridLayout):
             if self.selected_answer != False:
                 if self.ids[str(self.selected_answer[0]) + 'a_btn'].background_color == [0.9, 0.9, 0.9, 1]:
                     self.ids[str(self.selected_answer[0]) + 'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                    self.light_id(str(self.selected_answer[0]) + 'a_btn').fill(0,0,0)
+                    self.light_button(str(self.selected_answer[0]) + 'a_btn', 0, 0, 0)
 
 
             self.selected_answer = id
@@ -108,7 +110,7 @@ class MainCode(GridLayout):
             # highlight selected answer if it is not matched yet
             if self.ids[id].background_color == [0.5, 0.5, 0.5, 1]:
                 self.ids[id].background_color = (0.9, 0.9, 0.9, 1)
-                self.light_id(id).fill(1,1,1)
+                self.light_button(id, 255, 255, 255)
 
         # if there are now two selections, question and answer
         if (self.selected_question != False) and (self.selected_answer != False):
@@ -133,10 +135,14 @@ class MainCode(GridLayout):
                 if q_index == a_index:
                     # change BOTH buttons to color
                     current_color = self.matching_colors[self.matches]
+                    current_neo_r = self.matching_colors_neo_r[self.matches]
+                    current_neo_g = self.matching_colors_neo_r[self.matches]
+                    current_neo_b = self.matching_colors_neo_r[self.matches]
+
                     self.ids[str(q_index) + 'q_btn'].background_color = current_color  # question button
                     self.ids[str(a_button) + 'a_btn'].background_color = current_color  # answer button
-                    self.light_id(str(q_index) + 'q_btn').fill(self.matching_colors_neo[self.matches])
-                    self.light_id(str(a_button) + 'a_btn').fill(self.matching_colors_neo[self.matches])
+                    self.light_button(str(q_index) + 'q_btn', current_neo_r, current_neo_g, current_neo_b)
+                    self.light_button(str(a_button) + 'a_btn', current_neo_r, current_neo_g, current_neo_b)
 
                     self.matches += 1
                     self.matches = self.matches % 4
@@ -144,21 +150,21 @@ class MainCode(GridLayout):
                 else:
                     self.ids[str(q_index) + 'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
                     self.ids[str(a_button) + 'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                    self.light_id(str(q_index) + 'q_btn').fill(0,0,0)
-                    self.light_id(str(a_button) + 'a_btn').fill(0,0,0)
+                    self.light_button(str(q_index) + 'q_btn', 0, 0, 0)
+                    self.light_button(str(a_button) + 'a_btn', 0, 0, 0)
 
                     self.selected_question = False
                     self.selected_answer = False
 
             elif (self.acolored == True) and (self.qcolored == False):
                 self.ids[str(q_index) + 'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                self.light_id(str(q_index) + 'q_btn').fill(0, 0, 0)
+                self.light_button(str(q_index) + 'q_btn', 0, 0, 0)
                 self.selected_question = False
                 self.selected_answer = False
 
             elif (self.qcolored == True) and (self.acolored == False):
                 self.ids[str(a_button) + 'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
-                self.light_id(str(a_button) + 'a_btn').fill(0, 0, 0)
+                self.light_button(str(a_button) + 'a_btn', 0, 0, 0)
                 self.selected_question = False
                 self.selected_answer = False
 
@@ -166,17 +172,19 @@ class MainCode(GridLayout):
                 self.selected_question = False
                 self.selected_answer = False
 
-    def light_id(self, id):
+
+    def light_button(self, id, r, g, b):
 
         if id[1] == 'q':
-            pin = id[0]
+            neo_id = id[0]
 
         else:
-            pin = id[0] + 4
+            neo_id = id[0] + 4
 
-        pin_value = 'board.D' + str(self.pin_list[int(pin)])
+        for i in range(12):
+            pixel_index = neo_id * 12 + i
+            neopixel.NeoPixel(board.D18, 96)[pixel_index] = (r, g, b)
 
-        return 'neopixel.NeoPixel(' + pin_value + ', 12)'
 
     def restart_game(self):
         questions, answers = generate_equation()
