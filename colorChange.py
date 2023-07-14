@@ -179,7 +179,7 @@ class MainCode(GridLayout):
             neo_pin = board.D18
 
         else:
-            neo_pin = board.D10
+            neo_pin = board.D21
 
         neo_id = id[0]
         num_pins = 48
