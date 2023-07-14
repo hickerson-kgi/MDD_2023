@@ -3,13 +3,13 @@ from kivy.uix.gridlayout import GridLayout
 import random
 from kivy.graphics import Color
 from kivy.clock import Clock
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import board
 import neopixel
 
 
 # Configure GPIO pins
-#GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)
 button1_pin = 16
 button2_pin = 22
 button3_pin = 25
@@ -182,7 +182,7 @@ class MainCode(GridLayout):
             neo_id = id[0] + 4
 
         for i in range(12):
-            pixel_index = neo_id * 12 + i
+            pixel_index = int(neo_id) * 12 + i
             neopixel.NeoPixel(board.D18, 96)[pixel_index] = (r, g, b)
 
 
@@ -227,23 +227,23 @@ def button_callback(channel):
 
 
 # Set up button event detection
-#GPIO.setup(button1_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#GPIO.setup(button2_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#GPIO.setup(button3_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#GPIO.setup(button4_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#GPIO.setup(button5_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#GPIO.setup(button6_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#GPIO.setup(button7_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-#GPIO.setup(button8_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button1_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button2_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button3_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button4_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button5_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button6_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button7_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button8_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-#GPIO.add_event_detect(button1_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-#GPIO.add_event_detect(button2_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-#GPIO.add_event_detect(button3_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-#GPIO.add_event_detect(button4_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-#GPIO.add_event_detect(button5_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-#GPIO.add_event_detect(button6_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-#GPIO.add_event_detect(button7_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
-#GPIO.add_event_detect(button8_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button1_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button2_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button3_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button4_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button5_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button6_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button7_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button8_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 
 # Run the Kivy application
 class Demi(App):
