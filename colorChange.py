@@ -217,13 +217,13 @@ def button_callback(channel):
     elif channel == button4_pin:
         App.get_running_app().root.generate('3q_btn')  # Replace with the corresponding button ID
     elif channel == button5_pin:
-        App.get_running_app().root.generate('4q_btn')  # Replace with the corresponding button ID
+        App.get_running_app().root.generate('0a_btn')  # Replace with the corresponding button ID
     elif channel == button3_pin:
-        App.get_running_app().root.generate('5q_btn')  # Replace with the corresponding button ID
+        App.get_running_app().root.generate('1a_btn')  # Replace with the corresponding button ID
     elif channel == button4_pin:
-        App.get_running_app().root.generate('6q_btn')  # Replace with the corresponding button ID
+        App.get_running_app().root.generate('2a_btn')  # Replace with the corresponding button ID
     elif channel == button5_pin:
-        App.get_running_app().root.generate('7q_btn')  # Replace with the corresponding button ID
+        App.get_running_app().root.generate('3a_btn')  # Replace with the corresponding button ID
 
 
 # Set up button event detection
