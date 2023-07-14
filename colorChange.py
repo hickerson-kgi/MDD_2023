@@ -175,6 +175,11 @@ class MainCode(GridLayout):
 
     def light_button(self, id, r, g, b):
 
+
+        neo_pin = board.D18
+        num_pins = 96
+        pixels = neopixel.NeoPixel(neo_pin, num_pins)
+
         if id[1] == 'q':
             neo_id = id[0]
 
@@ -183,7 +188,7 @@ class MainCode(GridLayout):
 
         for i in range(12):
             pixel_index = int(neo_id) * 12 + i
-            neopixel.NeoPixel(board.D18, 96)[pixel_index] = (r, g, b)
+            pixels[pixel_index] = (r, g, b)
 
 
     def restart_game(self):
