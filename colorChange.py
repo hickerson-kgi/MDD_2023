@@ -3,7 +3,7 @@ from kivy.uix.gridlayout import GridLayout
 import random
 from kivy.graphics import Color
 from kivy.clock import Clock
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import board
 import neopixel
 
