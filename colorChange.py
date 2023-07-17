@@ -176,17 +176,17 @@ class MainCode(GridLayout):
     def light_button(self, id, r, g, b):
 
         if id[1] == 'q':
-            neo_id = id[0]
+            neo_id = int(id[0])
 
         else:
-            neo_id = id[0] + 4
+            neo_id = int(id[0]) + 4
 
-        neo_pin = board.D1
+        neo_pin = board.D18
         num_pins = 96
         pixels = neopixel.NeoPixel(neo_pin, num_pins)
 
         for i in range(12):
-            pixel_index = int(neo_id) * 12 + i
+            pixel_index = neo_id * 12 + i
             pixels[pixel_index] = (r, g, b)
 
 
