@@ -3,6 +3,7 @@ from kivy.uix.gridlayout import GridLayout
 import random
 from kivy.graphics import Color
 from kivy.clock import Clock
+import time
 import RPi.GPIO as GPIO
 import board
 import neopixel
@@ -13,7 +14,7 @@ GPIO.setmode(GPIO.BCM)
 button1_pin = 16
 button2_pin = 22
 button3_pin = 25
-button4_pin = 4
+button4_pin = 27
 button5_pin = 24
 button6_pin = 6
 button7_pin = 23
@@ -53,7 +54,7 @@ class MainCode(GridLayout):
         self.matching_colors = [(1, 0, 0.5, 1), (1, 1, 0, 1), (0, 0, 1, 1), (0, 1, 0, 1)]  # Store random matching colors for button pairs
         self.matches = 0
 
-        #self.pin_list = [16,22,25,4,24,6,23,17]
+        #self.pin_list = [16,22,25,27,24,6,23,17]
 
         #the corresponsing rgb codes for the matching colors on neopixel lights
         self.matching_colors_neo_r = [255, 255, 0, 0]
@@ -71,7 +72,10 @@ class MainCode(GridLayout):
 
         self.right_ids = ['0a_btn', '1a_btn', '2a_btn', '3a_btn']
         self.answer_order = [0, 1, 2, 3]
+
+        random.seed(time.time())
         random.shuffle(self.answer_order)
+
         for j in range(len(self.right_ids)):
             self.ids[self.right_ids[j]].text = str(self.answers[self.answer_order[j]])
 
