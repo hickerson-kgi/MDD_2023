@@ -101,7 +101,6 @@ class MainCode(GridLayout):
                     self.ids[self.selected_question].background_color = (0.5, 0.5, 0.5, 1)
                     self.light_button(self.selected_question, 0, 0, 0)
 
-
             self.selected_question = id
 
             # highlight selected answer if it is not matched yet
@@ -166,24 +165,17 @@ class MainCode(GridLayout):
                     self.light_button(str(q_index) + 'q_btn', 0, 0, 0)
                     self.light_button(str(a_button) + 'a_btn', 0, 0, 0)
 
-                    self.selected_question = False
-                    self.selected_answer = False
 
             elif (self.acolored == True) and (self.qcolored == False):
                 self.ids[str(q_index) + 'q_btn'].background_color = (0.5, 0.5, 0.5, 1)
                 self.light_button(str(q_index) + 'q_btn', 0, 0, 0)
-                self.selected_question = False
-                self.selected_answer = False
 
             elif (self.qcolored == True) and (self.acolored == False):
                 self.ids[str(a_button) + 'a_btn'].background_color = (0.5, 0.5, 0.5, 1)
                 self.light_button(str(a_button) + 'a_btn', 0, 0, 0)
-                self.selected_question = False
-                self.selected_answer = False
 
-            else:
-                self.selected_question = False
-                self.selected_answer = False
+            self.selected_question = False
+            self.selected_answer = False
 
 
     def light_button(self, id, r, g, b):
