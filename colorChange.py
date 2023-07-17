@@ -212,8 +212,6 @@ class MainCode(GridLayout):
             btn.background_color = (0.5, 0.5, 0.5, 1)
             self.light_button(self.right_ids[j], 0, 0, 0)
 
-        MainWidget.prev_btn = None
-
 # Function to handle button click events
 def button_callback(channel):
     if channel == button1_pin:
