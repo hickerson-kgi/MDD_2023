@@ -62,7 +62,7 @@ class MainCode(GridLayout):
         self.matching_colors_neo_b = [255, 0, 255, 0]
 
         #initialize the neopixel chain
-        self.neo_pin = board.D18
+        self.neo_pin = board.D10
         self.num_pins = 96
         self.pixels = neopixel.NeoPixel(self.neo_pin, self.num_pins)
 
@@ -93,7 +93,7 @@ class MainCode(GridLayout):
     # Function to handle button click events
     def generate(self, id):
         # indicates left side, i.e. question
-
+        print("Button pressed", id)
         if id[1] == 'q':
             # Unhighlights previous question if a new question is selected
             if self.selected_question != False:
