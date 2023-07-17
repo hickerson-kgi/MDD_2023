@@ -70,9 +70,11 @@ class MainCode(GridLayout):
 
         for k in self.left_ids:
             self.ids[k].background_color = (0.5, 0.5, 0.5, 1)
+            self.light_button(k, 0, 0, 0)
 
         for l in self.right_ids:
             self.ids[l].background_color = (0.5, 0.5, 0.5, 1)
+            self.light_button(l, 0, 0, 0)
 
         self.selected_question = False
         self.selected_answer = False
@@ -136,8 +138,8 @@ class MainCode(GridLayout):
                     # change BOTH buttons to color
                     current_color = self.matching_colors[self.matches]
                     current_neo_r = self.matching_colors_neo_r[self.matches]
-                    current_neo_g = self.matching_colors_neo_r[self.matches]
-                    current_neo_b = self.matching_colors_neo_r[self.matches]
+                    current_neo_g = self.matching_colors_neo_g[self.matches]
+                    current_neo_b = self.matching_colors_neo_b[self.matches]
 
                     self.ids[str(q_index) + 'q_btn'].background_color = current_color  # question button
                     self.ids[str(a_button) + 'a_btn'].background_color = current_color  # answer button
@@ -187,6 +189,7 @@ class MainCode(GridLayout):
 
         for i in range(12):
             pixel_index = neo_id * 12 + i
+
             pixels[pixel_index] = (r, g, b)
 
 
