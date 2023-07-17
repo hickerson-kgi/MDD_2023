@@ -189,7 +189,6 @@ class MainCode(GridLayout):
 
         for i in range(12):
             pixel_index = neo_id * 12 + i
-
             pixels[pixel_index] = (r, g, b)
 
 
@@ -205,14 +204,14 @@ class MainCode(GridLayout):
             btn = self.ids[self.left_ids[i]]
             btn.text = str(questions[i])
             btn.background_color = (0.5, 0.5, 0.5, 1)
-            self.light_button(self.ids[self.left_ids[i]], 0, 0, 0)
+            self.light_button(self.left_ids[i], 0, 0, 0)
 
         random.shuffle(self.answer_order)
         for j in range(len(self.right_ids)):
             btn = self.ids[self.right_ids[j]]
             btn.text = str(answers[self.answer_order[j]])
             btn.background_color = (0.5, 0.5, 0.5, 1)
-            self.light_button(self.ids[self.right_ids[j]], 0, 0, 0)
+            self.light_button(self.right_ids[j], 0, 0, 0)
 
 
 # Function to handle button click events
