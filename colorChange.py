@@ -54,9 +54,16 @@ class MainCode(GridLayout):
         self.matches = 0
 
         #self.pin_list = [16,22,25,6,24,4,23,17]
+
+        #the corresponsing rgb codes for the matching colors on neopixel lights
         self.matching_colors_neo_r = [255, 255, 0, 0]
         self.matching_colors_neo_g = [0, 255, 255, 255]
         self.matching_colors_neo_b = [255, 0, 255, 0]
+
+        #initialize the neopixel chain
+        self.neo_pin = board.D18
+        self.num_pins = 96
+        self.pixels = neopixel.NeoPixel(self.neo_pin, self.num_pins)
 
         self.left_ids = ['0q_btn', '1q_btn', '2q_btn', '3q_btn']
         for i in range(len(self.left_ids)):
@@ -183,13 +190,9 @@ class MainCode(GridLayout):
         else:
             neo_id = int(id[0]) + 4
 
-        neo_pin = board.D18
-        num_pins = 96
-        pixels = neopixel.NeoPixel(neo_pin, num_pins)
-
         for i in range(12):
             pixel_index = neo_id * 12 + i
-            pixels[pixel_index] = (r, g, b)
+            self.pixels[pixel_index] = (r, g, b)
 
 
     def restart_game(self):
