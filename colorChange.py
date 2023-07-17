@@ -229,11 +229,11 @@ def button_callback(channel):
         App.get_running_app().root.generate('3q_btn')  # Replace with the corresponding button ID
     elif channel == button5_pin:
         App.get_running_app().root.generate('0a_btn')  # Replace with the corresponding button ID
-    elif channel == button3_pin:
+    elif channel == button6_pin:
         App.get_running_app().root.generate('1a_btn')  # Replace with the corresponding button ID
-    elif channel == button4_pin:
+    elif channel == button7_pin:
         App.get_running_app().root.generate('2a_btn')  # Replace with the corresponding button ID
-    elif channel == button5_pin:
+    elif channel == button8_pin:
         App.get_running_app().root.generate('3a_btn')  # Replace with the corresponding button ID
 
 
