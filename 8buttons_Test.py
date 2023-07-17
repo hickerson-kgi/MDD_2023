@@ -13,7 +13,7 @@ GPIO.setmode(GPIO.BCM)
 button1_pin = 16
 button2_pin = 22
 button3_pin = 25
-button4_pin = 4
+button4_pin = 27
 button5_pin = 24
 button6_pin = 6
 button7_pin = 23
