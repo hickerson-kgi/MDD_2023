@@ -104,9 +104,9 @@ class MainCode(GridLayout):
             self.selected_question = id
 
             # highlight selected answer if it is not matched yet
-            if self.ids[id].background_color == [0.5, 0.5, 0.5, 1]:
-                self.ids[id].background_color = (0.9, 0.9, 0.9, 1)
-                self.light_button(id, 255, 255, 255)
+            if self.ids[self.selected_question].background_color == [0.5, 0.5, 0.5, 1]:
+                self.ids[self.selected_question].background_color = (0.9, 0.9, 0.9, 1)
+                self.light_button(self.selected_question, 255, 255, 255)
 
         # indicates right side, i.e. answer
         if id[1] == 'a':
@@ -120,9 +120,9 @@ class MainCode(GridLayout):
             self.selected_answer = id
 
             # highlight selected answer if it is not matched yet
-            if self.ids[id].background_color == [0.5, 0.5, 0.5, 1]:
-                self.ids[id].background_color = (0.9, 0.9, 0.9, 1)
-                self.light_button(id, 255, 255, 255)
+            if self.ids[self.selected_answer].background_color == [0.5, 0.5, 0.5, 1]:
+                self.ids[self.selected_answer].background_color = (0.9, 0.9, 0.9, 1)
+                self.light_button(self.selected_answer, 255, 255, 255)
 
         # if there are now two selections, question and answer
         if (self.selected_question != False) and (self.selected_answer != False):
