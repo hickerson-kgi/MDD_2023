@@ -22,7 +22,6 @@ button8_pin = 17
 button9_pin = 26
 
 
-
 # Function to generate random arithmetic equations
 def generate_equation():
     questions = []
@@ -206,7 +205,9 @@ class MainCode(GridLayout):
             btn.background_color = (0.5, 0.5, 0.5, 1)
             self.light_button(self.left_ids[i], 0, 0, 0)
 
+        random.seed(time.time())
         random.shuffle(self.answer_order)
+
         for j in range(len(self.right_ids)):
             btn = self.ids[self.right_ids[j]]
             btn.text = str(answers[self.answer_order[j]])
@@ -232,7 +233,7 @@ def button_callback(channel):
     elif channel == button8_pin:
         App.get_running_app().root.generate('3a_btn')  # Replace with the corresponding button ID
     elif channel == button9_pin:
-        App.get_running_app().root.restart_game('reset')  # Replace with the corresponding button ID
+        App.get_running_app().root.restart_game()  # Reset game
 
 
 # Set up button event detection
