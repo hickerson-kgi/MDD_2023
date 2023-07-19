@@ -192,27 +192,29 @@ class MainCode(GridLayout):
 
 
     def restart_game(self):
-        questions, answers = generate_equation()
-        self.answer_order = [0, 1, 2, 3]
+        self.questions, self.answers = generate_equation()
 
-        self.selected_question = False
-        self.selected_answer = False
         self.matches = 0
 
         for i in range(len(self.left_ids)):
-            btn = self.ids[self.left_ids[i]]
-            btn.text = str(questions[i])
-            btn.background_color = (0.5, 0.5, 0.5, 1)
-            self.light_button(self.left_ids[i], 0, 0, 0)
+            self.ids[self.left_ids[i]].text = str(self.questions[i])
 
         random.seed(time.time())
         random.shuffle(self.answer_order)
 
         for j in range(len(self.right_ids)):
-            btn = self.ids[self.right_ids[j]]
-            btn.text = str(answers[self.answer_order[j]])
-            btn.background_color = (0.5, 0.5, 0.5, 1)
-            self.light_button(self.right_ids[j], 0, 0, 0)
+            self.ids[self.right_ids[j]].text = str(self.answers[self.answer_order[j]])
+
+        for k in self.left_ids:
+            self.ids[k].background_color = (0.5, 0.5, 0.5, 1)
+            self.light_button(k, 0, 0, 0)
+
+        for l in self.right_ids:
+            self.ids[l].background_color = (0.5, 0.5, 0.5, 1)
+            self.light_button(l, 0, 0, 0)
+
+        self.selected_question = False
+        self.selected_answer = False
 
 # Function to handle button click events
 def button_callback(channel):
