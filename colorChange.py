@@ -22,7 +22,6 @@ button8_pin = 17
 button9_pin = 26
 
 
-
 # Function to generate random arithmetic equations
 def generate_equation():
     questions = []
@@ -232,7 +231,7 @@ def button_callback(channel):
     elif channel == button8_pin:
         App.get_running_app().root.generate('3a_btn')  # Replace with the corresponding button ID
     elif channel == button9_pin:
-        App.get_running_app().root.restart_game('reset')  # Replace with the corresponding button ID
+        App.get_running_app().root.restart_game()  # Reset game
 
 
 # Set up button event detection
