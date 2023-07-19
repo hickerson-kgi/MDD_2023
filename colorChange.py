@@ -19,6 +19,7 @@ button5_pin = 24
 button6_pin = 6
 button7_pin = 23
 button8_pin = 17
+button9_pin = 26
 
 
 
@@ -230,6 +231,8 @@ def button_callback(channel):
         App.get_running_app().root.generate('2a_btn')  # Replace with the corresponding button ID
     elif channel == button8_pin:
         App.get_running_app().root.generate('3a_btn')  # Replace with the corresponding button ID
+    elif channel == button9_pin:
+        App.get_running_app().root.restart_game('reset')  # Replace with the corresponding button ID
 
 
 # Set up button event detection
@@ -241,6 +244,7 @@ GPIO.setup(button5_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(button6_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(button7_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(button8_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button9_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 GPIO.add_event_detect(button1_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 GPIO.add_event_detect(button2_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
@@ -250,6 +254,7 @@ GPIO.add_event_detect(button5_pin, GPIO.FALLING, callback=button_callback, bounc
 GPIO.add_event_detect(button6_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 GPIO.add_event_detect(button7_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 GPIO.add_event_detect(button8_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
+GPIO.add_event_detect(button9_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)
 
 # Run the Kivy application
 class Demi(App):
