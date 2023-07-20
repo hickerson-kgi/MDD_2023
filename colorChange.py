@@ -182,7 +182,7 @@ class MainCode(GridLayout):
             neo_id = int(id[0])
 
             for i in range(12):
-                pixel_index = ((4 - neo_id) * 12) + i
+                pixel_index = ((3 - neo_id) * 12) + i
                 self.pixels[pixel_index] = (r, g, b)
 
         else:
