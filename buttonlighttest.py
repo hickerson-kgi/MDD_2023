@@ -8,11 +8,11 @@ import neopixel
 GPIO.setmode(GPIO.BCM)
 button1_pin = 16
 button2_pin = 22
-button3_pin = 25
-button4_pin = 27
-button5_pin = 24
-button6_pin = 6
-button7_pin = 23
+button3_pin = 24
+button4_pin = 23
+button5_pin = 13
+button6_pin = 5
+button7_pin = 22
 button8_pin = 17
 button9_pin = 26
 
@@ -23,6 +23,8 @@ class MainCode(GridLayout):
         self.neo_pin = board.D10
         self.num_pins = 96
         self.pixels = neopixel.NeoPixel(self.neo_pin, self.num_pins)
+
+
         print("Button pressed", id)
         light_button(id, 255, 255, 255)
 
@@ -59,7 +61,7 @@ def button_callback(channel):
     elif channel == button8_pin:
         App.get_running_app().root.generate('3a_btn')  # Replace with the corresponding button ID
     elif channel == button9_pin:
-        App.get_running_app().root.restart_game()  # Reset game
+        App.get_running_app().root.generate('reset')  # Reset game
 
 
 # Set up button event detection

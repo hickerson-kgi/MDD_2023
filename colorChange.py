@@ -13,11 +13,11 @@ import neopixel
 GPIO.setmode(GPIO.BCM)
 button1_pin = 16
 button2_pin = 22
-button3_pin = 25
-button4_pin = 27
-button5_pin = 24
-button6_pin = 6
-button7_pin = 23
+button3_pin = 24
+button4_pin = 23
+button5_pin = 13
+button6_pin = 5
+button7_pin = 22
 button8_pin = 17
 button9_pin = 26
 
@@ -53,8 +53,6 @@ class MainCode(GridLayout):
 
         self.matching_colors = [(1, 0, 0.5, 1), (1, 1, 0, 1), (0, 0, 1, 1), (0, 1, 0, 1)]  # Store random matching colors for button pairs
         self.matches = 0
-
-        #self.pin_list = [16,22,25,27,24,6,23,17]
 
         #the corresponsing rgb codes for the matching colors on neopixel lights
         self.matching_colors_neo_r = [255, 255, 0, 0]
