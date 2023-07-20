@@ -6,14 +6,14 @@ import neopixel
 
 # Configure GPIO pins
 GPIO.setmode(GPIO.BCM)
-button1_pin = 16
-button2_pin = 22
-button3_pin = 24
-button4_pin = 23
-button5_pin = 13
-button6_pin = 5
-button7_pin = 22
-button8_pin = 17
+button1_pin = 23
+button2_pin = 24
+button3_pin = 12
+button4_pin = 16
+button5_pin = 17
+button6_pin = 22
+button7_pin = 5
+button8_pin = 13
 button9_pin = 26
 
 class MainCode(GridLayout):
@@ -34,12 +34,16 @@ class MainCode(GridLayout):
         if id[1] == 'q':
             neo_id = int(id[0])
 
+            for i in range(12):
+                pixel_index = ((3 - neo_id) * 12) + i
+                self.pixels[pixel_index] = (r, g, b)
+
         else:
             neo_id = int(id[0]) + 4
 
-        for i in range(12):
-            pixel_index = neo_id * 12 + i
-            self.pixels[pixel_index] = (r, g, b)
+            for i in range(12):
+                pixel_index = neo_id * 12 + i
+                self.pixels[pixel_index] = (r, g, b)
 
 
 # Function to handle button click events
