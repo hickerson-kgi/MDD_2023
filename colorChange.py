@@ -55,9 +55,9 @@ class MainCode(GridLayout):
         self.matches = 0
 
         #the corresponsing rgb codes for the matching colors on neopixel lights
-        self.matching_colors_neo_r = [55, 55, 0, 0]
-        self.matching_colors_neo_g = [0, 55, 55, 55]
-        self.matching_colors_neo_b = [55, 0, 55, 0]
+        self.matching_colors_neo_r = [155, 155, 0, 0]
+        self.matching_colors_neo_g = [0, 155, 155, 155]
+        self.matching_colors_neo_b = [155, 0, 155, 0]
 
         #initialize the neopixel chain
         self.neo_pin = board.D10
@@ -104,7 +104,7 @@ class MainCode(GridLayout):
             # highlight selected answer if it is not matched yet
             if self.ids[self.selected_question].background_color == [0.5, 0.5, 0.5, 1]:
                 self.ids[self.selected_question].background_color = (0.9, 0.9, 0.9, 1)
-                self.light_button(self.selected_question, 55, 55, 55)
+                self.light_button(self.selected_question, 155, 155, 155)
 
         # indicates right side, i.e. answer
         if id[1] == 'a':
@@ -120,7 +120,7 @@ class MainCode(GridLayout):
             # highlight selected answer if it is not matched yet
             if self.ids[self.selected_answer].background_color == [0.5, 0.5, 0.5, 1]:
                 self.ids[self.selected_answer].background_color = (0.9, 0.9, 0.9, 1)
-                self.light_button(self.selected_answer, 55, 55, 55)
+                self.light_button(self.selected_answer, 155, 155, 155)
 
         # if there are now two selections, question and answer
         if (self.selected_question != False) and (self.selected_answer != False):
