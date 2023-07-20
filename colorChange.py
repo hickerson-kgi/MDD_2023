@@ -178,6 +178,7 @@ class MainCode(GridLayout):
 
     def light_button(self, id, r, g, b):
 
+        print('light button')
         if id[1] == 'q':
             neo_id = int(id[0])
 
