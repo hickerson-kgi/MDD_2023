@@ -181,12 +181,16 @@ class MainCode(GridLayout):
         if id[1] == 'q':
             neo_id = int(id[0])
 
+            for i in range(12):
+                pixel_index = 4 - (neo_id * 12) + i
+                self.pixels[pixel_index] = (r, g, b)
+
         else:
             neo_id = int(id[0]) + 4
 
-        for i in range(12):
-            pixel_index = neo_id * 12 + i
-            self.pixels[pixel_index] = (r, g, b)
+            for i in range(12):
+                pixel_index = neo_id * 12 + i
+                self.pixels[pixel_index] = (r, g, b)
 
 
     def restart_game(self):
